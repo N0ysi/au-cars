@@ -2,6 +2,7 @@ import '../styles/globals.css'; // Импорт глобальных стиле�
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AuthProvider } from '../context/AuthContext'; // Убедитесь, что провайдер аутентификации существует
+import Socials from '@/components/Socials';
 
 
 function MyApp({ Component, pageProps }) {

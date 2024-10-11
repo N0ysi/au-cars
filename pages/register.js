@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Socials from '@/components/Socials';
 
 const Register = () => {
     const router = useRouter();
@@ -11,7 +12,7 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         console.log("Submitting registration with:", { username, email, password }); // Логирование данных перед отправкой
 
         const res = await fetch('/api/auth/register', {
@@ -62,10 +63,11 @@ const Register = () => {
                     required
                 />
                 <button className="authBtn" type="submit">Register</button>
+                <Link href="/login" className="link">
+                    <p>Login in?</p>
+                </Link>
             </form>
-            <Link href="/login" className="link">
-                <p>Login in?</p>
-            </Link>
+            <Socials />
         </div>
     );
 };

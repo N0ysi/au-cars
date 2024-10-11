@@ -2,9 +2,11 @@ html {
     vertical-align: baseline;
     scroll-behavior: smooth;
     overflow-x: hidden;
+    height: 100%;
 }
 
 body {
+    height: 100%;
     margin: 0 10px;
     min-width: 340px;
     display: flex;
@@ -16,6 +18,10 @@ body {
     font-family: 'Poppins', sans-serif;
     color: #1A0A03;
     overflow-wrap: normal;
+}
+
+div{
+    height: 100%;
 }
 
 header {
@@ -334,19 +340,18 @@ time {
     min-width: 340px;
     display: grid;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: end;
     justify-items: center;
     filter: drop-shadow(0px 3px 5px rgba(0, 0, 0.25));
     border-color: rgba(0, 0, 0, 0.25);
 }
 
-
 .authForm {
     margin: 5px 0;
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
+    justify-items: center;
+    justify-content: center;
 }
 
 .authForm input{

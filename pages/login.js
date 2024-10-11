@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Socials from '@/components/Socials';
 
 const Login = () => {
     const router = useRouter();
-    const [username, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -17,7 +17,7 @@ const Login = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, email, password }),
+            body: JSON.stringify({ email, password }),
         });
 
         const data = await res.json();
@@ -34,11 +34,11 @@ const Login = () => {
             <h1 className="title">Login</h1>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form className="authForm" onSubmit={handleSubmit}>
-                <input
-                    type="username"
-                    value={username}
-                    onChange={(e) => setUserName(e.target.value)}
-                    placeholder="UserName"
+            <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
                     required
                 />
                 <input
@@ -49,10 +49,11 @@ const Login = () => {
                     required
                 />
                 <button className="authBtn" type="submit">Login</button>
+                <Link href="/register" className="link">
+                    <p>Not registered yet?</p>
+                </Link>
             </form>
-            <Link href="/register" className="link">
-                <p>Not registered yet?</p>
-            </Link>
+            <Socials />
         </div>
     );
 };

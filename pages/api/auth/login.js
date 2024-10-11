@@ -5,19 +5,19 @@ import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     try {
       await dbConnect();
 
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ email });
       if (!user) {
-        return res.status(401).json({ message: "wrong username or password" });
+        return res.status(401).json({ message: "wrong email or password" });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        return res.status(401).json({ message: "wrong username or password" });
+        return res.status(401).json({ message: "wrong email or password" });
       }
 
       const token = jwt.sign(
