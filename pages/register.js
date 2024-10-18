@@ -38,6 +38,7 @@ const Register = () => {
 
     return (
         <div className="authDiv">
+            <img src='/img/login.svg' />
             <h1 className="title">Register</h1>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form className="authForm" onSubmit={handleSubmit}>
@@ -62,10 +63,12 @@ const Register = () => {
                     placeholder="Password"
                     required
                 />
-                <button className="authBtn" type="submit">Register</button>
-                <Link href="/login" className="link">
-                    <p>Login in?</p>
-                </Link>
+                <div className='login'>
+                    <button className="btn" type="submit">Register</button>
+                    <Link href="/login" className="link">
+                        <p>Login in?</p>
+                    </Link>
+                </div>
             </form>
             <Socials />
         </div>

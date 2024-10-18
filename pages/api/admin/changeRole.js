@@ -5,7 +5,6 @@ import { withRole } from '../../../utils/auth';
 const handler = async (req, res) => {
     const { method } = req;
 
-    // Подключение к базе данных
     await dbConnect();
 
     switch (method) {

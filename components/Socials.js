@@ -5,7 +5,7 @@ export default function Socials() {
     <section id="section-Social">
       <footer>
         <div className="information">
-          <p>Author: Iliupov Rustam</p>
+          <p>Author: <b>Iliupov Rustam</b></p>
           <hr />
           <p>
             Working hours:
@@ -15,10 +15,8 @@ export default function Socials() {
           <p>
             Our social media:
           </p>
-          <ul className="icons">
-            <li><a href="#" onClick={() => window.open('https://www.instagram.com/')}><i>In</i></a></li>
-            <li><a href="#" onClick={() => window.open('https://www.facebook.com/')}><i>Fc</i></a></li>
-          </ul>
+          <button className='social_btn'><a href="#" onClick={() => window.open('https://www.instagram.com/')}>In</a></button>
+          <button className='social_btn'><a href="#" onClick={() => window.open('https://www.facebook.com/')}>Fc</a></button>
         </div>
       </footer>
     </section>

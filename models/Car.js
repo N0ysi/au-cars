@@ -6,7 +6,10 @@ const CarSchema = new mongoose.Schema({
   torque: String,
   transmission: String,
   price: String,
-  imageUrl: String,
+  url: String,
+  imgUrl: String,
+  amount: String,
+  userId: String || ''  
 });
 
 export default mongoose.models.Car || mongoose.model('Car', CarSchema);

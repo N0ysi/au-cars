@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useAuth } from '../context/AuthContext';
 import Socials from '@/components/Socials';
 
 const Login = () => {
@@ -8,6 +9,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const { login } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,8 +23,8 @@ const Login = () => {
         });
 
         const data = await res.json();
-        console.log(data);
         if (res.ok) {
+            login(email, password);
             router.push('/'); // Перенаправление на главную страницу
         } else {
             setError(data.message);
@@ -31,10 +33,11 @@ const Login = () => {
 
     return (
         <div className="authDiv">
+            <img src='/img/login.svg'/>
             <h1 className="title">Login</h1>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form className="authForm" onSubmit={handleSubmit}>
-            <input
+                <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -48,10 +51,12 @@ const Login = () => {
                     placeholder="Password"
                     required
                 />
-                <button className="authBtn" type="submit">Login</button>
-                <Link href="/register" className="link">
-                    <p>Not registered yet?</p>
-                </Link>
+                <div className='login'>
+                    <button className="btn" type="submit">Login</button>
+                    <Link href="/register" className="link">
+                        <p>Not registered yet?</p>
+                    </Link>
+                </div>
             </form>
             <Socials />
         </div>

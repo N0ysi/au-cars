@@ -12,20 +12,24 @@ export default async function handler(req, res) {
 
       const user = await User.findOne({ email });
       if (!user) {
+        console.log("User not found");
         return res.status(401).json({ message: "wrong email or password" });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
+        console.log("Password mismatch");
         return res.status(401).json({ message: "wrong email or password" });
       }
 
       const token = jwt.sign(
-        { userId: user._id, email: user.email, role: user.role },
+        { userId: user._id, username: user.username, email: user.email, role: user.role },
         process.env.JWT_SECRET,
         { expiresIn: '1h' }
       );
 
+      res.setHeader('Set-Cookie', `token=${token}; Path=/; Max-Age=3600;`);
+            
       return res.status(201).json({
         success: true,
         data: {

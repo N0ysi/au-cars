@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
-    throw new Error('Не задана переменная окружения MONGODB_URI');
+    throw new Error('MONGODB_URI is undefined');
 }
 
 let isConnected; // Установлено ли соединение?
@@ -18,5 +18,5 @@ export default async function dbConnect() {
     const db = await mongoose.connect(MONGODB_URI);
 
     isConnected = db.connections[0].readyState; // Устанавливаем состояние соединения
-    console.log('Подключение к MongoDB установлено');
+    console.log('DB connected');
 }
