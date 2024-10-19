@@ -4,15 +4,15 @@ import Car from '@/models/Car';
 export default async function handler(req, res) {
 
     if (req.method === 'POST') {
-        let { name, power, torque, transmission, price, url, imgUrl,amount } = req.body;
-        console.log("Received request to register:", { name, power, torque, transmission, price, url, imgUrl, amount });
+        let { name, power, torque, transmission, type, price, url, imgUrl, amount } = req.body;
+        console.log("Received request to register:", { name, power, torque, transmission, type, price, url, imgUrl, amount });
         try {
             await dbConnect();
 
             const existingCar = await Car.findOne({ name });
             console.log("existing car", existingCar);
             if (existingCar) {
-                existingCar.amount += amount;
+                existingCar.amount = parseInt(amount) + parseInt(existingCar.amount);
                 await existingCar.save();
                 res.status(201).json({
                     success: true,
@@ -27,10 +27,11 @@ export default async function handler(req, res) {
                     power: power,
                     torque: torque,
                     transmission: transmission,
+                    type: type,
                     price: price,
                     url: url,
                     imgUrl: imgUrl,
-                    amount: amount
+                    amount: parseInt(amount)
                 });
 
                 await newCar.save();

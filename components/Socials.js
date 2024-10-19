@@ -5,13 +5,11 @@ export default function Socials() {
     <section id="section-Social">
       <footer>
         <div className="information">
-          <p>Author: <b>Iliupov Rustam</b></p>
-          <hr />
+          <p>Author: <b>Iliupov Rustam</b> </p>
           <p>
             Working hours:
-            <time> Mo-Fr: 9:00 - 18:00</time>
+            <time> Mo-Fr: 9:00 - 18:00</time> 
           </p>
-          <hr />
           <p>
             Our social media:
           </p>

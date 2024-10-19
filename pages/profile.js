@@ -8,8 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 
 export default function Profile() {
   const { user } = useAuth();
-  const userStr =
-    console.log("User", user);
+  console.log("User", user);
   return (
     <div>
       <Header />

@@ -3,15 +3,11 @@ html {
     scroll-behavior: smooth;
     overflow-x: hidden;
     height: auto;
-    background: hsla(212, 35%, 58%, 1);
-    background: linear-gradient(90deg, hsla(212, 35%, 58%, 1) 0%, hsla(218, 32%, 80%, 1) 100%);
-    background: -moz-linear-gradient(90deg, hsla(212, 35%, 58%, 1) 0%, hsla(218, 32%, 80%, 1) 100%);
-    background: -webkit-linear-gradient(90deg, hsla(212, 35%, 58%, 1) 0%, hsla(218, 32%, 80%, 1) 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#2278FB", endColorstr="#6BDFDB", GradientType=1);
+    background: linear-gradient(315deg, hsla(235, 21%, 21%, 1) 0%, hsla(240, 3%, 71%, 1) 100%);
 }
 
 body {
-    height: 100%;
+    height: auto;
     margin: 0 10px;
     min-width: 340px;
     display: flex;
@@ -22,7 +18,7 @@ body {
     justify-items: center;
     font-family: 'Poppins',
         sans-serif;
-    color: #000000;
+    color: #EDF2F4;
     overflow-wrap: normal;
 }
 
@@ -32,24 +28,21 @@ div {
 
 img {
     border-style: groove;
-    border-color: #000000;
-    background-color: #379683;
+    border-color: #EDF2F4;
     border-radius: 50px;
+    background-blend-mode: screen;
 }
 
 header {
     position: sticky;
-    z-index: 2;
+    z-index: 1;
     top: 10px;
-    margin-bottom: 10px;
+    width: auto;
+    height: auto;
+    margin-bottom: 20px;
     border-radius: 10px;
-    width: 100%;
-    height: max-content;
     align-items: center;
-    background: hsla(212, 35%, 58%, 1);
-    background: linear-gradient(90deg, hsla(212, 35%, 58%, 1) 0%, hsla(218, 32%, 80%, 1) 100%);
-    background: -moz-linear-gradient(90deg, hsla(212, 35%, 58%, 1) 0%, hsla(218, 32%, 80%, 1) 100%);
-    background: -webkit-linear-gradient(90deg, hsla(212, 35%, 58%, 1) 0%, hsla(218, 32%, 80%, 1) 100%);
+    background-color: #8D99AE;
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
 
@@ -64,7 +57,7 @@ nav {
     align-content: stretch;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    border-color: #000000;
+    border-color: #EDF2F4;
     border-style: groove;
     border-radius: 10px;
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
@@ -74,6 +67,7 @@ nav img {
     width: 140px;
     margin: 5px;
     border-radius: 15px;
+    background-color: #8D99AE;
 }
 
 nav ul {
@@ -92,12 +86,13 @@ nav ul li {
 nav ul a {
     width: 87px;
     text-decoration: none;
-    color: #000000;
+    color: #EDF2F4;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 16px;
+    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
 
 nav button {
@@ -112,23 +107,24 @@ nav button {
     line-height: 25px;
     white-space: nowrap;
     border-style: groove;
-    border-color: #000000;
-    background-color: #6D90B9;
-    color: #FFFFFF;
     border-radius: 100px;
     padding: 0px 24px;
+    background: #8D99AE;
+    border-color: #EDF2F4;
+    color: #EDF2F4;
+    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
 
 .btn_talk {
+    color: #EDF2F4;
+    border-color: #EDF2F4;
+    background-color: #8D99AE;
     cursor: pointer;
     height: 50px;
     border-radius: 100px;
-    border-color: #000000;
-    color: #EDF5E1;
     cursor: pointer;
     text-align: center;
     border-style: groove;
-    background-color: #379683;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: bold;
@@ -136,6 +132,7 @@ nav button {
     line-height: 25px;
     white-space: nowrap;
     padding: 0px 24px;
+    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
 
 .profile {
@@ -148,7 +145,7 @@ nav button {
 }
 
 section {
-    margin-bottom: 5px;
+    margin: 5px 0;
     height: auto;
     display: flex;
     flex-wrap: wrap;
@@ -180,7 +177,9 @@ section {
     font-style: normal;
     font-weight: bold;
     font-size: 70px;
-    color: #000000;
+    color: #EDF2F4;
+    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+
 }
 
 .home img {
@@ -195,10 +194,8 @@ p {
 .text {
     margin: 10px 0;
     padding: 15px;
-    border-style: groove;
-    border-radius: 50px;
-    color: #000000;
-    border-color: #000000;
+    color: #EDF2F4;
+    border-color: #EDF2F4;
 }
 
 .description {
@@ -241,15 +238,14 @@ p.title {
     margin-top: 10px;
     border-radius: 40px;
     border-style: groove;
-    border-width: thick;
-    border-color: #000000;
-    color: #000000;
+    border-color: #EDF2F4;
+    color: #EDF2F4;
     font-family: 'Roboto', sans-serif;
     filter: drop-shadow(5px 10px 7px rgba(0, 0, 0, 0.5));
 }
 
 .example img {
-    border-color: #000000;
+    border-color: #EDF2F4;
     border-radius: 100px;
     width: 90%;
     filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.5));
@@ -268,6 +264,8 @@ p.name {
 }
 
 p.specs {
+    width: 50%;
+    text-align: center;
     font-size: 21px;
     font-family: 'Roboto', sans-serif;
 }
@@ -287,8 +285,9 @@ p.specs {
 }
 
 footer {
+    background-color: #2B2D42;
     margin-bottom: 5px;
-    border-color: #000000;
+    border-color: #EDF2F4;
     border-style: groove;
     border-radius: 10px;
     width: 100%;
@@ -299,21 +298,14 @@ footer {
 .information {
     margin: 5px 0;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
-    color: #000000;
+    justify-content: center;
+    color: #EDF2F4;
 }
 
 .information p {
-    margin: 0;
+    margin: 0 5px;
     font-size: 20px;
-}
-
-.information hr {
-    width: 100%;
-    height: 2px;
-    background-color: #000000;
 }
 
 time {
@@ -326,27 +318,24 @@ time {
     padding: 0px 24px;
     font-size: 18px;
     line-height: 25px;
-    background-color: #379683;
-    border-color: #000000;
+    background-color: #8D99AE;
+    border-color: #EDF2F4;
     white-space: nowrap;
+    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
 
 .information button a {
-    color: #EDF5E1;
+    color: #051923;
     text-decoration: none;
 }
 
-.title {
-    margin: 5px 0;
-}
-
 .authDiv {
+    margin: 20px;
     min-width: 340px;
     display: grid;
     justify-content: space-evenly;
     align-items: end;
     justify-items: center;
-    border-color: #000000;
     filter: drop-shadow(0px 3px 5px rgba(0, 0, 0.25));
 }
 
@@ -366,7 +355,7 @@ time {
     width: 100%;
     padding: 10px;
     border-style: groove;
-    border-color: #000000;
+    border-color: #EDF2F4;
 }
 
 .login {
@@ -378,7 +367,7 @@ time {
 .link {
     margin: 10px 0;
     text-decoration: none;
-    color: #EDF5E1;
+    color: #EDF2F4;
 }
 
 .loading {
@@ -395,7 +384,7 @@ h1.title {
     font-style: normal;
     font-weight: bold;
     font-size: 50px;
-    color: #000000;
+    color: #EDF2F4;
 }
 
 h2.title {
@@ -404,7 +393,7 @@ h2.title {
     font-style: normal;
     font-weight: bold;
     font-size: 30px;
-    color: #000000;
+    color: #EDF2F4;
 }
 
 .userInfo {
@@ -413,8 +402,8 @@ h2.title {
     height: auto;
     border-radius: 40px;
     border-style: groove;
-    border-color: #000000;
-    color: #FFFFFF;
+    border-color: #EDF2F4;
+    color: #EDF2F4;
     justify-content: center;
     justify-items: center;
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
@@ -426,12 +415,10 @@ h2.title {
     height: auto;
     padding: 10px;
     display: flex;
-    border-radius: 40px;
-    border-style: groove;
-    border-color: #000000;
     color: #FFFFFF;
-    justify-items: center;
     flex-wrap: wrap;
+    justify-items: center;
     justify-content: center;
+    align-items: center;
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }

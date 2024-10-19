@@ -6,6 +6,7 @@ export default function Dashboard() {
     const [torque, setTorque] = useState('');
     const [transmission, setTransmossion] = useState('');
     const [price, setPrice] = useState('');
+    const [type, setType] = useState('');
     const [url, setUrl] = useState('');
     const [imgUrl, setImgUrl] = useState('');
     const [amount, setAmount] = useState('');
@@ -14,20 +15,20 @@ export default function Dashboard() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("Submitting registration with:", { name, power, torque, transmission, price, url, imgUrl, amount }); // Логирование данных перед отправкой
+        console.log("Submitting registration with:", { name, power, torque, transmission, type, price, url, imgUrl, amount }); // Логирование данных перед отправкой
 
         const res = await fetch('/api/cars/addCar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, power, torque, transmission, price, url, imgUrl, amount }),
+            body: JSON.stringify({ name, power, torque, transmission, type, price, url, imgUrl, amount }),
         });
 
         const data = await res.json();
         console.log(data);
         if (res.ok) {
-            console.log('Car has been added');// Перенаправление на страницу входа
+            console.log('success');// Перенаправление на страницу входа
         } else {
             if (typeof data.message === 'object') {
                 setError(JSON.stringify(data.message)); // Преобразуем объект в строку
@@ -40,7 +41,7 @@ export default function Dashboard() {
     return (
         <div className="container">
             <div className="description">
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <p className="title">Add car:</p>
                 <div className="example">
                     <form className="authForm" onSubmit={handleSubmit}>
@@ -70,6 +71,13 @@ export default function Dashboard() {
                             value={transmission}
                             onChange={(e) => setTransmossion(e.target.value)}
                             placeholder="transmission"
+                            required
+                        />
+                        <input
+                            type="text"
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
+                            placeholder="type"
                             required
                         />
                         <input

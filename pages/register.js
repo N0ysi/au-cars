@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Socials from '@/components/Socials';
+import Header from '@/components/Header';
 
 const Register = () => {
     const router = useRouter();
@@ -37,39 +38,42 @@ const Register = () => {
     };
 
     return (
-        <div className="authDiv">
-            <img src='/img/login.svg' />
-            <h1 className="title">Register</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <form className="authForm" onSubmit={handleSubmit}>
-                <input
-                    type="username"
-                    value={username}
-                    onChange={(e) => setUserName(e.target.value)}
-                    placeholder="UserName"
-                    required
-                />
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    required
-                />
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    required
-                />
-                <div className='login'>
-                    <button className="btn" type="submit">Register</button>
-                    <Link href="/login" className="link">
-                        <p>Login in?</p>
-                    </Link>
-                </div>
-            </form>
+        <div>
+            <Header />
+            <div className="authDiv">
+                <img src='/img/login.svg' />
+                <h1 className="title">Register</h1>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+                <form className="authForm" onSubmit={handleSubmit}>
+                    <input
+                        type="username"
+                        value={username}
+                        onChange={(e) => setUserName(e.target.value)}
+                        placeholder="UserName"
+                        required
+                    />
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        required
+                    />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        required
+                    />
+                    <div className='login'>
+                        <button className="btn" type="submit">Register</button>
+                        <Link href="/login" className="link">
+                            <p>Login in?</p>
+                        </Link>
+                    </div>
+                </form>
+            </div>
             <Socials />
         </div>
     );

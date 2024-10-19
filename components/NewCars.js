@@ -1,38 +1,94 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 export default function NewCars() {
-  return (
-    <section id="section-NewCars">
-      <div className="container">
-        <div className="description">
-          <p className="title">New interesting cars:</p>
-          <div className="example">
-            <img src="/img/audi rs7.jpeg" alt="Audi RS7" className="car_img" />
-            <p className="name">Audi RS7 2024:</p>
-            <p className="specs">
-              <b>Power:</b> 591 hp/6250 rpm<br />
-              <b>Torque:</b> 800 nm/2050 rpm<br />
-              <b>Transmission:</b> 8-speed automatic<br />
-              <b>Vehicle type:</b> All-wheel-drive, 4-door hatchback<br />
-              <b>Price:</b> $150,000
-            </p>
-            <button className="btn" onClick={() => window.open('https://www.caranddriver.com/audi/rs7')}>Read more</button>
-            <button className='btn'>Buy</button>
+  const [cars, setCars] = useState([]);
+  const { user } = useAuth();
+
+  const buyCar = async (carId, userId) => {
+    console.log(`Buying car with ID: carId: ${carId} | userId: ${userId}`);
+    try {
+      const res = await fetch('/api/cars/buyCar', {
+        method: 'POST',
+        cache: 'no-store', 
+        headers: {
+          body: JSON.stringify({carId, userId})
+        }
+      });
+    const data = await res.json();
+    console.log('data', data);
+    if (res.ok) {
+      var button = document.getElementById(carId);
+      button.textContent = 'bought';
+      button.style.background = 'green';
+    } else {
+      console.error("Ошибка при получении автомобилей:", data.error);
+    }
+  } catch (error) {
+    console.error('Ошибка при запросе автомобилей:', error);
+  }
+};
+
+
+const getOurCars = async () => {
+  try {
+    const res = await fetch('/api/cars/getOurCars', {
+      method: 'GET', // Используем метод GET
+      cache: 'no-store'
+    });
+    const data = await res.json();
+    if (res.ok) {
+      if (data && Array.isArray(data.cars)) {
+        setCars(data.cars);  // Присваиваем массив автомобилей из объекта
+        console.log('setCars', cars);
+      } else {
+        console.error("Полученные данные не являются массивом:", data);
+        setCars([]); // Очищаем список автомобилей в случае ошибки
+      }
+    } else {
+      console.error("Ошибка при получении автомобилей:", data.error);
+    }
+  } catch (error) {
+    console.error('Ошибка при запросе автомобилей:', error);
+  }
+};
+
+useEffect(() => {
+  getOurCars();
+}, []);
+
+return (
+  <section id="section-NewCars">
+    <div className="container">
+      <div className="description">
+        <p className="title">New interesting cars:</p>
+        {cars && cars.length > 0 ? (
+          cars.map((car) => (
+            <div key={car._id} className="example">
+              <img src={car.imgUrl} alt={car.name} className="car_img" />
+              <p className="name">{car.name}</p>
+              <p className="specs">
+                <b>Power:</b> {car.power}<br />
+                <b>Torque:</b> {car.torque}<br />
+                <b>Transmission:</b> {car.transmission}<br />
+                <b>Vehicle type:</b> {car.type}<br />
+                <b>Price:</b> {car.price}
+              </p>
+              <button className="btn" onClick={() => window.open(car.url)}>
+                Read more
+              </button>
+              <button id={car._id} className='btn' onClick={() => buyCar(car._id, user.userId)}>
+                Buy
+              </button>
+            </div>
+          ))
+        ) : (
+          <div className="text">
+            <p>We have no cars</p>
           </div>
-          <div className="example">
-            <img src="/img/panamera1.jpeg" alt="Porsche Panamera" className="car_img" />
-            <p className="name">Porsche Panamera Turbo S 2024:</p>
-            <p className="specs">
-              <b>Power:</b> 680 hp/6000 rpm<br />
-              <b>Torque:</b> 930 nm/2330 - 4000 rpm<br />
-              <b>Transmission:</b> Dual-clutch, 8-speed<br />
-              <b>Price:</b> $192,995
-            </p>
-            <button className="btn" onClick={() => window.open('https://www.caranddriver.com/porsche/panamera-turbo-turbo-s')}>Read more</button>
-            <button className='btn'>Buy</button>
-          </div>
-        </div>
+        )}
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 }
