@@ -31,7 +31,7 @@ export default function Header() {
               <button className="btn" onClick={logout}>Logout</button>
             </div>
           )}
-          <button className="btn_talk">Talk to an Expert</button>
+          <button className="btn">Talk to an Expert</button>
         </nav>
       </div>
     </header>

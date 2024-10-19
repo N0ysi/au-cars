@@ -20,4 +20,4 @@ const handler = async (req, res) => {
   }
 };
 
-export default withRole(handler, ['admin']); 
+export default withRole(handler, ['manager']);

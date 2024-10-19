@@ -5,21 +5,16 @@ import { withRole } from '../../../utils/auth';
 const handler = async (req, res) => {
     const { method } = req;
 
+    // Подключение к базе данных
     await dbConnect();
 
     switch (method) {
-        case 'PUT': {
-            const { userId, newRole } = req.body;
+        case 'DELETE': {
+            const { userId } = req.body;
 
             // Проверяем наличие всех необходимых данных
-            if (!userId || !newRole) {
-                return res.status(400).json({ message: 'Please provide userId and newRole' });
-            }
-
-            // Проверяем, что роль корректная (user, manager, admin)
-            const validRoles = ['user', 'manager', 'admin'];
-            if (!validRoles.includes(newRole)) {
-                return res.status(400).json({ message: 'Invalid role specified' });
+            if (!userId) {
+                return res.status(400).json({ message: 'Please provide a userId' });
             }
 
             try {
@@ -29,12 +24,11 @@ const handler = async (req, res) => {
                     return res.status(404).json({ message: 'User not found' });
                 }
 
-                user.role = newRole;
-                await user.save();
+                await user.findByIdAndDelete(userId);
 
-                return res.status(200).json({ message: 'Role updated successfully', user });
+                return res.status(200).json({ message: 'User deleted successfully', user });
             } catch (error) {
-                return res.status(500).json({ message: 'Error updating role', error });
+                return res.status(500).json({ message: 'Error deleting user', error });
             }
         }
 
@@ -44,4 +38,4 @@ const handler = async (req, res) => {
 };
 
 // Используем middleware для проверки роли администратора
-export default withRole(handler, ['admin']);
+export default withRole(handler, ['manager']);

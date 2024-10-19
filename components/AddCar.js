@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Dashboard() {
+export default function AddCar() {
     const [name, setName] = useState('');
     const [power, setPower] = useState('');
     const [torque, setTorque] = useState('');

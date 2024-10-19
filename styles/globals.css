@@ -33,6 +33,17 @@ img {
     background-blend-mode: screen;
 }
 
+img:hover {
+    transform: scale(1.05);
+    /* Легкое увеличение при наведении */
+}
+
+button:hover {
+    transform: scale(1.05);
+    /* Легкое увеличение при наведении */
+}
+
+
 header {
     position: sticky;
     z-index: 1;
@@ -68,6 +79,12 @@ nav img {
     margin: 5px;
     border-radius: 15px;
     background-color: #8D99AE;
+    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+}
+
+nav img:hover {
+    transform: scale(1.05);
+    /* Легкое увеличение при наведении */
 }
 
 nav ul {
@@ -81,6 +98,11 @@ nav ul li {
     width: 100%;
     text-align: center;
     white-space: nowrap;
+}
+
+nav ul li:hover {
+    transform: scale(1.05);
+    /* Легкое увеличение при наведении */
 }
 
 nav ul a {
@@ -113,26 +135,13 @@ nav button {
     border-color: #EDF2F4;
     color: #EDF2F4;
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn_talk {
-    color: #EDF2F4;
-    border-color: #EDF2F4;
-    background-color: #8D99AE;
-    cursor: pointer;
-    height: 50px;
-    border-radius: 100px;
-    cursor: pointer;
-    text-align: center;
-    border-style: groove;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 25px;
-    white-space: nowrap;
-    padding: 0px 24px;
-    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+.btn:hover {
+    background-color: #2B2D42;
+    transform: scale(1.05);
+    /* Легкое увеличение при наведении */
 }
 
 .profile {
@@ -234,7 +243,7 @@ p.title {
 .example {
     display: inline-grid;
     justify-items: center;
-    padding: 10px;
+    padding: 15px;
     margin-top: 10px;
     border-radius: 40px;
     border-style: groove;
@@ -344,6 +353,7 @@ time {
 }
 
 .authForm {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-items: center;
@@ -355,7 +365,12 @@ time {
     width: 100%;
     padding: 10px;
     border-style: groove;
+    border-width: 5px;
     border-color: #EDF2F4;
+}
+
+.authForm input:focus-within {
+    border-color: #58df78;
 }
 
 .login {
@@ -421,4 +436,45 @@ h2.title {
     justify-content: center;
     align-items: center;
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+}
+
+.users {
+    margin: 10px 0;
+    height: auto;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.users button {
+    margin: 10px 10px;
+}
+
+.userBtn {
+    cursor: pointer;
+    height: 50px;
+    width: 250px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    white-space: nowrap;
+    border-style: groove;
+    border-radius: 100px;
+    padding: 0px 24px;
+    background: #8D99AE;
+    border-color: #EDF2F4;
+    color: #EDF2F4;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+}
+
+.userBtn:hover {
+    background-color: #2B2D42;
+    transform: scale(1.05);
+}
+
+.userBtn:active {
+    background-color: #1e7e34;
+    transform: scale(1.1);
 }

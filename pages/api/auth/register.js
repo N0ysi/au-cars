@@ -36,7 +36,6 @@ export default async function handler(req, res) {
         { expiresIn: '1h' }
       );
 
-
       res.status(201).json({
         success: true,
         data: newUser,

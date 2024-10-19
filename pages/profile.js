@@ -1,8 +1,9 @@
-import Dashboard from '@/components/Dashboard';
+import AddCar from '@/components/AddCar';
 import Header from '@/components/Header';
 import OtherInfo from '@/components/OtherInfo';
 import Socials from '@/components/Socials';
 import UserInfo from '@/components/UserInfo';
+import ManageUsers from '@/components/ManageUsers';
 import React from 'react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -17,7 +18,10 @@ export default function Profile() {
         <OtherInfo />
         {
           user?.role != 'user' ? (
-            <Dashboard />
+            <div className='container'>
+              <AddCar />
+              <ManageUsers />
+            </div>
           ) : (null)
         }
       </div>
