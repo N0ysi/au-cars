@@ -2,52 +2,62 @@ import dbConnect from '../../../utils/dbConnect';
 import Car from '@/models/Car';
 
 export default async function handler(req, res) {
-
     if (req.method === 'POST') {
         const { carId, userId } = req.body;
-        console.log("Received request to buy:", userId);
-        if (!userId) {
-            try {
-                await dbConnect();
 
-                const existingCar = await Car.findOne(carId);
-                console.log("existing car", existingCar);
-
-                if (existingCar) {
-                    existingCar.amount = parseInt(existingCar.amount) - parseInt(1);
-                    existingCar.save();
-                    const newCar = await new Car(
-                        {
-                            userId: userId,
-                            name: existingCar.name,
-                            power: existingCar.power,
-                            torque: existingCar.torque,
-                            transmission: existingCar.transmission,
-                            type: existingCar.type,
-                            price: existingCar.price,
-                            url: existingCar.url,
-                            imgUrl: existingCar.imgUrl,
-                            amount: 1
-                        });
-                    await newCar.save();
-                    console.log('newCar: ', newCar)
-                    res.status(201).json({
-                        success: true,
-                        data: newCar,
-                        message: 'success'
-                    })
-                } else {
-                    console.error("Error during buying");
-                    res.status(404).json({ message: "Error during buying" });
-                }
-
-            } catch (error) {
-                console.error("Error during adding:", error);
-
-                res.status(500).json({ message: error });
-            }
+        // Check for required data
+        if (!carId || !userId) {
+            res.status(400).json({ message: 'carId and userId are required' });
         }
+
+        try {
+            // Connect to the database
+            await dbConnect();
+
+            // Find the car by ID
+            const existingCar = await Car.findById(carId);
+
+            if (!existingCar) {
+                // Car not found
+                res.status(404).json({ message: 'Car not found' });
+            }
+
+            // Update the quantity of the existing car
+            existingCar.amount = parseInt(existingCar.amount) - 1;
+            await existingCar.save();
+
+            // Create a new car entry with the userId
+            const newCar = new Car({
+                name: existingCar.name,
+                power: existingCar.power,
+                torque: existingCar.torque,
+                transmission: existingCar.transmission,
+                type: existingCar.type,
+                price: existingCar.price,
+                url: existingCar.url,
+                imgUrl: existingCar.imgUrl,
+                amount: 1,
+                userId: userId, // Важно, чтобы здесь был userId, а не email
+            });
+
+            // Save the new car in the database
+            await newCar.save();
+
+            // Send a success response
+            res.status(201).json({
+                success: true,
+                data: newCar,
+                message: 'Car purchased successfully',
+            });
+
+        } catch (error) {
+            // Handle errors
+            console.error("Error during adding:", error);
+            res.status(500).json({ message: 'Server error', error: error.message });
+        }
+
     } else {
+        // Method not allowed
         res.status(405).json({ message: 'Method not allowed' });
     }
 }

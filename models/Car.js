@@ -3,44 +3,41 @@ import mongoose from 'mongoose';
 const Car = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: true, 
   },
   power: {
     type: String,
-    required: true,
+    required: true, 
   },
   torque: {
     type: String,
-    required: true,
+    required: true, 
   },
   transmission: {
     type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
+    required: true, 
   },
   price: {
     type: String,
-    required: true,
+    required: true, 
   },
   url: {
     type: String,
-    required: true,
+    required: true, 
   },
   imgUrl: {
     type: String,
-    required: true,
+    required: true, 
   },
   amount: {
-    type: Number, // assuming it's a number indicating the amount of cars available
-    required: true,
+    type: Number,
+    required: true, 
   },
-  email: {
+  userId: {
     type: String,
-    default: null
-  },
+    required: false,
+    default: null 
+  }
 });
 
 // Exporting the Car model

@@ -10,13 +10,9 @@ export default async function handler(req, res) {
             await dbConnect();
 
             const existingCars = await Car.find({ userId });
-            console.log("existing car", existingCars);
+            console.log("existing car (getUserCars)", existingCars);
             if (existingCars) {
-                res.status(201).json({
-                    success: true,
-                    data: existingCars,
-                    message: 'success'
-                })
+                res.status(201).json({ existingCars })
             } else {
                 res.status(404).json({
                     success: false,
@@ -25,7 +21,7 @@ export default async function handler(req, res) {
             }
 
         } catch (error) {
-            console.error("Error during adding:", error);
+            console.error("Error during getting:", error);
 
             res.status(500).json({ message: error });
         }
