@@ -3,40 +3,44 @@ import mongoose from 'mongoose';
 const Car = new mongoose.Schema({
   name: {
     type: String,
-    required: true, 
+    required: true,
   },
   power: {
     type: String,
-    required: true, 
+    required: true,
   },
   torque: {
     type: String,
-    required: true, 
+    required: true,
   },
   transmission: {
     type: String,
-    required: true, 
+    required: true,
+  },
+  carType: {
+    type: String,
+    required: true,
   },
   price: {
     type: String,
-    required: true, 
+    required: true,
   },
   url: {
     type: String,
-    required: true, 
+    required: true,
   },
   imgUrl: {
     type: String,
-    required: true, 
+    required: true,
   },
   amount: {
     type: Number,
-    required: true, 
+    required: true,
   },
   userId: {
     type: String,
     required: false,
-    default: null 
+    default: null
   }
 });
 

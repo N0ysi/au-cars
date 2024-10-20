@@ -11,7 +11,7 @@ export default function NewCars() {
       console.error("User ID is missing!");
       return; // Остановим выполнение, если userId нет
     }
-  
+
     console.log(`Buying car with ID: carId: ${carId} | userId: ${userId}`);
     try {
       const res = await fetch('/api/cars/buyCar', {
@@ -21,10 +21,10 @@ export default function NewCars() {
         },
         body: JSON.stringify({ carId, userId }),
       });
-  
+
       const data = await res.json();
       console.log('data', data);
-  
+
       if (res.ok) {
         var button = document.getElementById(carId);
         button.textContent = 'bought';
@@ -79,7 +79,7 @@ export default function NewCars() {
                   <b>Power:</b> {car.power}<br />
                   <b>Torque:</b> {car.torque}<br />
                   <b>Transmission:</b> {car.transmission}<br />
-                  <b>Vehicle type:</b> {car.type}<br />
+                  <b>Vehicle type:</b> {car.carType}<br />
                   <b>Price:</b> {car.price}
                 </p>
                 <button className="btn" onClick={() => window.open(car.url)}>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useAuth } from '../context/AuthContext';
@@ -32,11 +32,16 @@ const Login = () => {
         }
     };
 
+    useEffect(() => {
+        document.documentElement.style.height = '100%';
+
+    });
+
     return (
         <div>
             <Header />
             <div className="authDiv">
-                <img src='/img/login.svg' />
+                <img src='/img/login.svg' alt="Login" />
                 <h1 className="title">Login</h1>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <form className="authForm" onSubmit={handleSubmit}>
@@ -62,7 +67,6 @@ const Login = () => {
                     </div>
                 </form>
             </div>
-            <Socials />
         </div>
     );
 };

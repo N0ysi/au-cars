@@ -50,7 +50,7 @@ export default function OtherInfo() {
                             <b>Power:</b> {car.power}<br />
                             <b>Torque:</b> {car.torque}<br />
                             <b>Transmission:</b> {car.transmission}<br />
-                            <b>Vehicle type:</b> {car.type}<br />
+                            <b>Vehicle type:</b> {car.carType}<br />
                             <b>Price:</b> {car.price}
                         </p>
                         <button className="btn" onClick={() => window.open(car.url)}>

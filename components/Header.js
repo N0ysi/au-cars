@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useAuth } from '../context/AuthContext';
 import Link from 'next/link';
 
 export default function Header() {
   const { user, logout } = useAuth();
+
+  useEffect(() => {
+    document.documentElement.style.height = 'auto';
+  })
 
   return (
     <header>

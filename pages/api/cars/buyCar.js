@@ -32,7 +32,7 @@ export default async function handler(req, res) {
                 power: existingCar.power,
                 torque: existingCar.torque,
                 transmission: existingCar.transmission,
-                type: existingCar.type,
+                carType: existingCar.carType,
                 price: existingCar.price,
                 url: existingCar.url,
                 imgUrl: existingCar.imgUrl,

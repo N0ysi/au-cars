@@ -233,6 +233,10 @@ p {
     font-family: 'Roboto', sans-serif;
 }
 
+.description button{
+    margin: 10px 0;
+}
+
 p.title {
     font-size: 40px;
     font-family: 'Roboto', sans-serif;
@@ -280,7 +284,7 @@ p.specs {
 }
 
 .images {
-    gap: 5px;
+    gap: 20px;
     display: flex;
     flex-wrap: wrap;
     align-content: space-around;
@@ -373,6 +377,7 @@ time {
     border-color: #58df78;
 }
 
+
 .login {
     display: grid;
     margin: 10px 0;
@@ -380,9 +385,13 @@ time {
 }
 
 .link {
-    margin: 10px 0;
+    margin: 15px 0;
     text-decoration: none;
     color: #EDF2F4;
+}
+
+.link:hover {
+    transform: scale(1.05);
 }
 
 .loading {
@@ -422,6 +431,10 @@ h2.title {
     justify-content: center;
     justify-items: center;
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+}
+
+.userInfo p{
+    font-size: 35px;
 }
 
 .otherInfo {

@@ -4,8 +4,8 @@ import Car from '@/models/Car';
 export default async function handler(req, res) {
 
     if (req.method === 'POST') {
-        let { name, power, torque, transmission, type, price, url, imgUrl, amount } = req.body;
-        console.log("Received request to register:", { name, power, torque, transmission, type, price, url, imgUrl, amount });
+        let { name, power, torque, transmission, carType, price, url, imgUrl, amount } = req.body;
+        console.log("Received request to register:", { name, power, torque, transmission, carType, price, url, imgUrl, amount });
         try {
             await dbConnect();
 
@@ -21,17 +21,17 @@ export default async function handler(req, res) {
                 })
             } else {
 
-                // Создаем нового пользователя
                 const newCar = await Car({
                     name: name,
                     power: power,
                     torque: torque,
                     transmission: transmission,
-                    type: type,
+                    carType: carType,
                     price: price,
                     url: url,
                     imgUrl: imgUrl,
-                    amount: parseInt(amount)
+                    amount: parseInt(amount),
+                    userId: ''
                 });
 
                 await newCar.save();

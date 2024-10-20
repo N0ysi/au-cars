@@ -4,31 +4,38 @@ export default function AddCar() {
     const [name, setName] = useState('');
     const [power, setPower] = useState('');
     const [torque, setTorque] = useState('');
-    const [transmission, setTransmossion] = useState('');
+    const [transmission, setTransmission] = useState('');
     const [price, setPrice] = useState('');
-    const [type, setType] = useState('');
+    const [carType, setCarType] = useState('');
     const [url, setUrl] = useState('');
     const [imgUrl, setImgUrl] = useState('');
     const [amount, setAmount] = useState('');
     const [error, setError] = useState('');
+    const [savedCar, setSavedCar] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("Submitting registration with:", { name, power, torque, transmission, type, price, url, imgUrl, amount }); // Логирование данных перед отправкой
+        console.log("Submitting registration with:", { name, power, torque, transmission, carType, price, url, imgUrl, amount }); // Логирование данных перед отправкой
 
         const res = await fetch('/api/cars/addCar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, power, torque, transmission, type, price, url, imgUrl, amount }),
+            body: JSON.stringify({ name, power, torque, transmission, carType, price, url, imgUrl, amount }),
         });
 
         const data = await res.json();
         console.log(data);
         if (res.ok) {
-            console.log('success');// Перенаправление на страницу входа
+            console.log('success');
+            setSavedCar((prevSavedCars) => [...prevSavedCars, name]);
+            setTimeout(() => {
+                setSavedCar((prevSavedCars) =>
+                    prevSavedCars.filter((carName) => carName !== name)
+                );
+            }, 2000);
         } else {
             if (typeof data.message === 'object') {
                 setError(JSON.stringify(data.message)); // Преобразуем объект в строку
@@ -69,15 +76,15 @@ export default function AddCar() {
                         <input
                             type="text"
                             value={transmission}
-                            onChange={(e) => setTransmossion(e.target.value)}
+                            onChange={(e) => setTransmission(e.target.value)}
                             placeholder="transmission"
                             required
                         />
                         <input
                             type="text"
-                            value={type}
-                            onChange={(e) => setType(e.target.value)}
-                            placeholder="type"
+                            value={carType}
+                            onChange={(e) => setCarType(e.target.value)}
+                            placeholder="carType"
                             required
                         />
                         <input
@@ -108,7 +115,8 @@ export default function AddCar() {
                             placeholder="amount"
                             required
                         />
-                        <button className="btn" type="submit">Add</button>
+                        <button className="btn" type="submit"
+                            style={{ backgroundColor: savedCar.includes(name) ? 'green' : '' }}>Add</button>
                     </form>
                 </div>
             </div>

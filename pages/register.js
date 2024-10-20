@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Socials from '@/components/Socials';
@@ -10,6 +10,13 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        // Устанавливаем высоту страницы на 100% при монтировании
+        document.documentElement.style.height = '100%';
+
+    });
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,10 +45,10 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <div className='authorize'>
             <Header />
             <div className="authDiv">
-                <img src='/img/login.svg' />
+                <img src='/img/login.svg' alt="Register" />
                 <h1 className="title">Register</h1>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <form className="authForm" onSubmit={handleSubmit}>
@@ -74,7 +81,6 @@ const Register = () => {
                     </div>
                 </form>
             </div>
-            <Socials />
         </div>
     );
 };
