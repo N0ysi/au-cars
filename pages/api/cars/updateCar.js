@@ -22,7 +22,6 @@ const handler = async (req, res) => {
 
         try {
             const user = await User.findById(userId);
-            console.log(user);
             if (!user) {
                 res.status(404).json({ message: 'User not found' });
             }
@@ -30,14 +29,12 @@ const handler = async (req, res) => {
             user.username = username;
             user.email = email;
             user.role = role;
-            const isMatchWithoutBcrypt = password == user.password;
-            if (!isMatchWithoutBcrypt) {
-                const isMatch = await bcrypt.compare(password, user.password);
-                if (!isMatch) {
-                    let salt = await bcrypt.genSalt(10);
-                    const hashedPassword = await bcrypt.hash(password, salt);
-                    user.password = hashedPassword;
-                }
+
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch) {
+                let salt = await bcrypt.genSalt(10);
+                const hashedPassword = await bcrypt.hash(password, salt);
+                user.password = hashedPassword;
             }
 
             await user.save();

@@ -84,7 +84,6 @@ nav img {
 
 nav img:hover {
     transform: scale(1.05);
-    /* Легкое увеличение при наведении */
 }
 
 nav ul {
@@ -102,7 +101,6 @@ nav ul li {
 
 nav ul li:hover {
     transform: scale(1.05);
-    /* Легкое увеличение при наведении */
 }
 
 nav ul a {
@@ -233,7 +231,7 @@ p {
     font-family: 'Roboto', sans-serif;
 }
 
-.description button{
+.description button {
     margin: 10px 0;
 }
 
@@ -364,6 +362,14 @@ time {
     justify-content: center;
 }
 
+.authForm img {
+    border-color: #EDF2F4;
+    border-radius: 100px;
+    width: 40%;
+    margin: 10px 0;
+    filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.5));
+}
+
 .authForm input {
     margin: 5px;
     width: 100%;
@@ -433,7 +439,7 @@ h2.title {
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
 
-.userInfo p{
+.userInfo p {
     font-size: 35px;
 }
 
@@ -451,7 +457,13 @@ h2.title {
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
 
-.users {
+.cars {
+    display: grid;
+    justify-items: center;
+    gap: 10px
+}
+  
+.manage {
     margin: 10px 0;
     height: auto;
     display: grid;
@@ -460,14 +472,15 @@ h2.title {
     justify-content: center;
 }
 
-.users button {
+.manage button {
     margin: 10px 10px;
 }
 
-.userBtn {
+.manageBtn {
     cursor: pointer;
     height: 50px;
-    width: 250px;
+    min-width: 250px;
+    width: auto;
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
@@ -482,12 +495,12 @@ h2.title {
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
 
-.userBtn:hover {
+.manageBtn:hover {
     background-color: #2B2D42;
     transform: scale(1.05);
 }
 
-.userBtn:active {
+.manageBtn:active {
     background-color: #1e7e34;
     transform: scale(1.1);
 }

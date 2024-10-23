@@ -73,7 +73,7 @@ export default function NewCars() {
           {cars && cars.length > 0 ? (
             cars.map((car) => (
               <div key={car._id} className="example">
-                <img src={car.imgUrl} alt={car.name} className="car_img" />
+                <img src={car.imgUrl} alt={car.name} />
                 <p className="name">{car.name}</p>
                 <p className="specs">
                   <b>Power:</b> {car.power}<br />

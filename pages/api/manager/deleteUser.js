@@ -3,37 +3,34 @@ import User from '../../../models/User';
 import { withRole } from '../../../utils/auth';
 
 const handler = async (req, res) => {
-    const { method } = req;
+    await dbConnect(); // Подключаемся к базе данных
+    if (req.method === 'DELETE') {
+        try {
+            const { userId: carId } = req.body;
 
-    // Подключение к базе данных
-    await dbConnect();
-
-    switch (method) {
-        case 'DELETE': {
-            const { userId } = req.body;
-
-            // Проверяем наличие всех необходимых данных
-            if (!userId) {
-                return res.status(400).json({ message: 'Please provide a userId' });
+            if (!carId) {
+                return res.status(400).json({ message: 'Please provide a carId' });
             }
 
             try {
                 // Ищем пользователя по userId и обновляем его роль
-                const user = await User.findById(userId);
+                const user = await User.findById(carId);
                 if (!user) {
-                    return res.status(404).json({ message: 'User not found' });
+                    return res.status(404).json({ message: 'Car not found' });
                 }
 
-                await user.findByIdAndDelete(userId);
+                await user.findByIdAndDelete(carId);
 
-                return res.status(200).json({ message: 'User deleted successfully', user });
+                return res.status(200).json({ message: 'Car deleted successfully', user });
             } catch (error) {
-                return res.status(500).json({ message: 'Error deleting user', error });
+                return res.status(500).json({ message: 'Error deleting car', error });
             }
-        }
+        } catch (error) {
 
-        default:
-            return res.status(405).json({ message: 'Method not allowed' });
+        }
+    } else {
+        res.setHeader('Allow', ['DELETE']);
+        res.status(405).end(`Method ${req.method} is not allowed`);
     }
 };
 
