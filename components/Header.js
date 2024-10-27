@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import Link from 'next/link';
 
@@ -16,6 +16,7 @@ export default function Header() {
           <Link href="/" className="logo">
             <img src="/img/logo.svg" alt="logo" />
           </Link>
+
           <ul>
             <li><a href="#section-Home">Home</a></li>
             <li><a href="#section-WhatWeDo">What we do</a></li>
@@ -23,6 +24,7 @@ export default function Header() {
             <li><a href="#section-AboutUs">About us</a></li>
             <li><a href="#section-Social">Socials</a></li>
           </ul>
+          
           {!user ? (
             <Link href="/login">
               <button className="btn">Login</button>
