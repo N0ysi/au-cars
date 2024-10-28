@@ -12,33 +12,50 @@ export default function Header() {
   return (
     <header>
       <div className="container">
-        <nav>
-          <Link href="/" className="logo">
-            <img src="/img/logo.svg" alt="logo" />
-          </Link>
+        <div className='head'>
+          <div className='navigation'>
+            <label class="hamburger-menu">
+              <input type="checkbox" />
+            </label>
+            <aside className='sidebar'>
+              <nav>
+                <a href="#section-Home">Home</a>
+                <a href="#section-What we do">What we do</a>
+                <a href="#section-New interesting cars">New interesting cars</a>
+                <a href="#section-About us">About us</a>
+                <a href="#section-Social">Socials</a>
+              </nav>
+            </aside>
 
-          <ul>
-            <li><a href="#section-Home">Home</a></li>
-            <li><a href="#section-WhatWeDo">What we do</a></li>
-            <li><a href="#section-NewCars">New interesting cars</a></li>
-            <li><a href="#section-AboutUs">About us</a></li>
-            <li><a href="#section-Social">Socials</a></li>
-          </ul>
-          
-          {!user ? (
-            <Link href="/login">
-              <button className="btn">Login</button>
+            <Link href="/" className="logo">
+              <img src="/img/logo.svg" alt="logo" />
             </Link>
-          ) : (
-            <div className="profile">
-              <Link href="/profile">
-                <button className="btn">{user.username}</button>
+            
+            <ul>
+              <li><a href="#section-Home">Home</a></li>
+              <li><a href="#section-WhatWeDo">What we do</a></li>
+              <li><a href="#section-NewCars">New interesting cars</a></li>
+              <li><a href="#section-AboutUs">About us</a></li>
+              <li><a href="#section-Social">Socials</a></li>
+            </ul>
+
+          </div>
+          <div className='header-buttons'>
+            {!user ? (
+              <Link href="/login">
+                <button className="btn">Login</button>
               </Link>
-              <button className="btn" onClick={logout}>Logout</button>
-            </div>
-          )}
-          <button className="btn">Talk to an Expert</button>
-        </nav>
+            ) : (
+              <div className="profile">
+                <Link href="/profile">
+                  <button className="btn">{user.username}</button>
+                </Link>
+                <button className="btn" onClick={logout}>Logout</button>
+              </div>
+            )}
+            <button className="btn">Talk to an Expert</button>
+          </div>
+        </div>
       </div>
     </header>
   );
