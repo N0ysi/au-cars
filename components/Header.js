@@ -14,23 +14,11 @@ export default function Header() {
       <div className="container">
         <div className='head'>
           <div className='navigation'>
-            <label class="hamburger-menu">
-              <input type="checkbox" />
-            </label>
-            <aside className='sidebar'>
-              <nav>
-                <a href="#section-Home">Home</a>
-                <a href="#section-What we do">What we do</a>
-                <a href="#section-New interesting cars">New interesting cars</a>
-                <a href="#section-About us">About us</a>
-                <a href="#section-Social">Socials</a>
-              </nav>
-            </aside>
-
             <Link href="/" className="logo">
               <img src="/img/logo.svg" alt="logo" />
             </Link>
-            
+
+
             <ul>
               <li><a href="#section-Home">Home</a></li>
               <li><a href="#section-WhatWeDo">What we do</a></li>
@@ -54,6 +42,20 @@ export default function Header() {
               </div>
             )}
             <button className="btn">Talk to an Expert</button>
+          </div>
+          <div className="hamburgerDiv">
+            <label className="hamburger-menu">
+              <input type="checkbox" />
+            </label>
+            <aside className="sidebar">
+              <nav>
+                <a href="#section-Home">Home</a>
+                <a href="#section-What we do">What we do</a>
+                <a href="#section-New interesting cars">New interesting cars</a>
+                <a href="#section-About us">About us</a>
+                <a href="#section-Social">Socials</a>
+              </nav>
+            </aside>
           </div>
         </div>
       </div>
