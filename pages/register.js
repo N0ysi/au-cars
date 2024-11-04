@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Socials from '@/components/Socials';
 import Header from '@/components/Header';
 
 const Register = () => {

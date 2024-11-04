@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useAuth } from '../context/AuthContext';
-import Socials from '@/components/Socials';
 import Header from '@/components/Header';
 
 const Login = () => {
