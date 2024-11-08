@@ -1,7 +1,7 @@
 import AddCar from '@/components/AddCar';
 import Header from '@/components/Header';
 import OtherInfo from '@/components/OtherInfo';
-import Socials from '@/components/Socials';
+import AddUser from '@/components/AddUser';
 import UserInfo from '@/components/UserInfo';
 import ManageUsers from '@/components/ManageUsers';
 import { useAuth } from '@/context/AuthContext';
@@ -13,6 +13,8 @@ export default function Profile() {
 
   const [isAddCarVisible, setIsAddCarVisible] = useState(false);
   const [isManageCarsVisible, setIsManageCarsVisible] = useState(false);
+  const [isAddUserVisible, setIsAddUserVisible] = useState(false);
+  const [isManageUsersVisible, setIsManageUsersVisible] = useState(false);
 
   return (
     <div>
@@ -33,7 +35,17 @@ export default function Profile() {
                 </button>
                 {isManageCarsVisible && <ManageCars />}
               </div>
-              <ManageUsers />
+              <div id='usersDiv' className='users'>
+                <p className="title">Manage users:</p>
+                <button className='btn' onClick={() => setIsAddUserVisible(!isAddUserVisible)}>
+                  {isAddUserVisible ? 'Hide Add User' : 'Show Add User'}
+                </button>
+                {isAddUserVisible && <AddUser />}
+                <button className='btn' onClick={() => setIsManageUsersVisible(!isManageUsersVisible)}>
+                  {isManageUsersVisible ? 'Hide Manage Users' : 'Show Manage Users'}
+                </button>
+                {isManageUsersVisible && <ManageUsers />}
+              </div>
             </div>
           ) : (
             <OtherInfo />

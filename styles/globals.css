@@ -9,10 +9,10 @@
     --bar-height: 8px;
     --hamburger-gap: 6px;
     --hamburger-margin: 8px;
-    --foreground: #EDF2F4;
+    --foreground: #000000;
     --foreground2: #232931;
-    --background: #153243;
-    --background2: #284B63;
+    --background: #999999;
+    --background2: #3b3939;
     --border-color: #B4B8AB;
     --border-radius: 100px;
     --animation-timing: 200ms ease-in-out;
@@ -480,6 +480,11 @@ time {
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
 
+.social_btn:hover{
+    background-color: var(--background2);
+    transform: scale(1.05);
+}
+
 .information button a {
     color: var(--foreground);
     text-decoration: none;
@@ -600,7 +605,7 @@ time {
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
 
-.cars {
+.cars, .users {
     display: grid;
     justify-items: center;
     gap: 10px

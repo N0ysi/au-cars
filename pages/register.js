@@ -10,13 +10,6 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        // Устанавливаем высоту страницы на 100% при монтировании
-        document.documentElement.style.height = '100%';
-
-    });
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 

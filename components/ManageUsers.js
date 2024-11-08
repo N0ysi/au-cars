@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import Cookies from 'js-cookie';
 
 export default function ManageUsers() {
     const [users, setUsers] = useState([]);
     const [openedUserId, setOpenedUserId] = useState(null); // Для отслеживания открытого пользователя
     const [savedUsers, setSavedUsers] = useState([]);
+    const [deletedUser, setDeletedUser] = useState([]);
 
     const formVariants = {
         hidden: { opacity: 0, height: 0 },
@@ -65,6 +65,41 @@ export default function ManageUsers() {
         }
     }
 
+    const deleteUser = async (user) => {
+        const token = Cookies.get('token');
+        if (token) {
+            try {
+                const res = await fetch('/api/manager/deleteUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        userId: user._id
+                    }),
+                });
+                const data = await res.json();
+                console.log('deleteUser', data);
+                if (res.ok) {
+                    console.log('User has been deleted successfully');
+                    // Добавляем пользователя в массив savedUsers для изменения цвета кнопки
+                    setDeletedUser((prevSavedUser) => [...prevSavedUser, user._id]);
+                    setTimeout(() => {
+                        setDeletedUser((prevSavedUser) =>
+                            prevSavedUser.filter((id) => id !== user._id)
+                        );
+                    }, 2000);
+                    manageUsers();
+                } else {
+                    console.error(data.message);
+                }
+            } catch (error) {
+                console.error('Error deleting user:', error);
+            }
+        }
+    }
+
     const manageUsers = async () => {
         try {
             const res = await fetch('/api/manager/manageUsers', {
@@ -95,7 +130,6 @@ export default function ManageUsers() {
 
     return (
         <div className="container">
-            <p className="title">Manage users:</p>
             <div id='manageUsersDiv' className="manage">
                 {users && users.length > 0 ? (
                     users.map((mappingUser) => (
@@ -109,53 +143,57 @@ export default function ManageUsers() {
                                 {mappingUser.username}
                             </button>
 
-                            {/* Анимация формы */}
-                            <AnimatePresence>
-                                {openedUserId === mappingUser._id && (
-                                    <motion.form
-                                        key={mappingUser._id}
-                                        className="authForm"
-                                        initial="hidden"
-                                        animate="visible"
-                                        exit="exit"
-                                        variants={formVariants}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        <input
-                                            type="text"
-                                            value={mappingUser.username}
-                                            onChange={(e) => handleInputChange(e, mappingUser._id, 'username')}
-                                            placeholder="Username"
-                                        />
-                                        <input
-                                            type="email"
-                                            defaultValue={mappingUser.email}
-                                            onChange={(e) => handleInputChange(e, mappingUser._id, 'email')}
-                                            placeholder="Email"
-                                        />
-                                        <input
-                                            type="password"
-                                            onChange={(e) => handleInputChange(e, mappingUser._id, 'password')}
-                                            placeholder="Password"
-                                        />
-                                        <input
-                                            type="text"
-                                            defaultValue={mappingUser.role}
-                                            onChange={(e) => handleInputChange(e, mappingUser._id, 'role')}
-                                            placeholder="Role"
-                                        />
-                                        <button className="btn" onClick={(e) => {
-                                            e.preventDefault();
-                                            saveChanges(mappingUser);
-                                        }} style={{
-                                            backgroundColor: savedUsers.includes(mappingUser._id) ? 'green' : ''
-                                        }}>
-                                            Save changes
-                                        </button>
-                                        <button className="btn">Delete</button>
-                                    </motion.form>
-                                )}
-                            </AnimatePresence>
+                            {openedUserId === mappingUser._id && (
+                                <form
+                                    key={mappingUser._id}
+                                    className="authForm"
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="exit"
+                                    variants={formVariants}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <input
+                                        type="text"
+                                        value={mappingUser.username}
+                                        onChange={(e) => handleInputChange(e, mappingUser._id, 'username')}
+                                        placeholder="Username"
+                                    />
+                                    <input
+                                        type="email"
+                                        defaultValue={mappingUser.email}
+                                        onChange={(e) => handleInputChange(e, mappingUser._id, 'email')}
+                                        placeholder="Email"
+                                    />
+                                    <input
+                                        type="password"
+                                        onChange={(e) => handleInputChange(e, mappingUser._id, 'password')}
+                                        placeholder="Password"
+                                    />
+                                    <input
+                                        type="text"
+                                        defaultValue={mappingUser.role}
+                                        onChange={(e) => handleInputChange(e, mappingUser._id, 'role')}
+                                        placeholder="Role"
+                                    />
+                                    <button className="btn" onClick={(e) => {
+                                        e.preventDefault();
+                                        saveChanges(mappingUser);
+                                    }} style={{
+                                        backgroundColor: savedUsers.includes(mappingUser._id) ? 'green' : ''
+                                    }}>
+                                        Save changes
+                                    </button>
+                                    <button className="btn" onClick={(e) => {
+                                        e.preventDefault();
+                                        deleteUser(mappingUser);
+                                    }} style={{
+                                        backgroundColor: deletedUser.includes(mappingUser._id) ? 'green' : ''
+                                    }}>
+                                        Delete
+                                    </button>
+                                </form>
+                            )}
                         </div>
                     ))
                 ) : (

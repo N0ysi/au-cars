@@ -16,6 +16,7 @@ export default function Socials() {
           </p>
           <button className='social_btn'><a href="#" onClick={() => window.open('https://www.instagram.com/')}>In</a></button>
           <button className='social_btn'><a href="#" onClick={() => window.open('https://www.facebook.com/')}>Fc</a></button>
+          <button className='social_btn'><a href="#" onClick={() => window.open('https://www.facebook.com/')}>X</a></button>
           </div>
         </div>
       </footer>
