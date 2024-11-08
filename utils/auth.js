@@ -1,8 +1,10 @@
 import jwt from 'jsonwebtoken';
+import * as cookie from 'cookie';
 
 export function withRole(handler, roles = []) {
   return async (req, res) => {
-    const token = req.headers.authorization?.split(' ')[1];
+    const cookies = cookie.parse(req.headers.cookie || '');
+    const token = cookies.token; 
 
     if (!token) {
       return res.status(401).json({ message: 'Authorization token required' });

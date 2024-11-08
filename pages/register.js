@@ -31,7 +31,6 @@ const Register = () => {
         });
 
         const data = await res.json();
-        console.log(data);
         if (res.ok) {
             router.push('/login'); // Перенаправление на страницу входа
         } else {

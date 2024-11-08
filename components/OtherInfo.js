@@ -39,30 +39,32 @@ export default function OtherInfo() {
     }, [user]);  // Зависимость на user
 
     return (
-        <div className="otherInfo">
+        <div className='container'>
             <h2 className="title">Previous purchases:</h2>
-            {cars && cars.length > 0 ? (
-                cars.map((car) => (
-                    <div key={car._id} className="example">
-                        <img src={car.imgUrl} alt={car.name} className="car_img" />
-                        <p className="name">{car.name}</p>
-                        <p className="specs">
-                            <b>Power:</b> {car.power}<br />
-                            <b>Torque:</b> {car.torque}<br />
-                            <b>Transmission:</b> {car.transmission}<br />
-                            <b>Vehicle type:</b> {car.carType}<br />
-                            <b>Price:</b> {car.price}
-                        </p>
-                        <button className="btn" onClick={() => window.open(car.url)}>
-                            Read more
-                        </button>
+            <div className="otherInfo">
+                {cars && cars.length > 0 ? (
+                    cars.map((car) => (
+                        <div key={car._id} className="example">
+                            <img src={car.imgUrl} alt={car.name} className="car_img" />
+                            <p className="name">{car.name}</p>
+                            <p className="specs">
+                                <b>Power:</b> {car.power}<br />
+                                <b>Torque:</b> {car.torque}<br />
+                                <b>Transmission:</b> {car.transmission}<br />
+                                <b>Vehicle type:</b> {car.carType}<br />
+                                <b>Price:</b> {car.price}
+                            </p>
+                            <button className="btn" onClick={() => window.open(car.url)}>
+                                Read more
+                            </button>
+                        </div>
+                    ))
+                ) : (
+                    <div className="text">
+                        <p>You have no cars</p>
                     </div>
-                ))
-            ) : (
-                <div className="text">
-                    <p>You have no cars</p>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }

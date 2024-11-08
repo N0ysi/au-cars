@@ -68,8 +68,8 @@ export default function NewCars() {
   return (
     <section id="section-NewCars">
       <div className="container">
+        <p className="title">New interesting cars:</p>
         <div className="description">
-          <p className="title">New interesting cars:</p>
           {cars && cars.length > 0 ? (
             cars.map((car) => (
               <div key={car._id} className="example">

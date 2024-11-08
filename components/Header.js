@@ -18,28 +18,13 @@ export default function Header() {
             <img src="/img/logo.svg" alt="logo" />
           </Link>
 
-          <div className="hamburgerDiv">
-            <label className="hamburger-menu">
-              <input type="checkbox" />
-            </label>
-            <aside className="sidebar">
-              <nav>
-                <a href="#section-Home">Home</a>
-                <a href="#section-WhatWeDo">What we do</a>
-                <a href="#section-NewCars">New interesting cars</a>
-                <a href="#section-AboutUs">About us</a>
-                <a href="#section-Social">Socials</a>
-              </nav>
-            </aside>
-          </div>
-
-          <ul>
-            <li><a href="#section-Home">Home</a></li>
-            <li><a href="#section-WhatWeDo">What we do</a></li>
-            <li><a href="#section-NewCars">New interesting cars</a></li>
-            <li><a href="#section-AboutUs">About us</a></li>
-            <li><a href="#section-Social">Socials</a></li>
-          </ul>
+          <nav>
+            <a href="#section-Home">Home</a>
+            <a href="#section-WhatWeDo">What we do</a>
+            <a href="#section-NewCars">New interesting cars</a>
+            <a href="#section-AboutUs">About us</a>
+            <a href="#section-Social">Socials</a>
+          </nav>
 
           <div className='header-buttons'>
             {!user ? (

@@ -1,7 +1,8 @@
 import dbConnect from '../../../utils/dbConnect';
 import Car from '@/models/Car';
+import { withRole } from '../../../utils/auth';
 
-export default async function handler(req, res) {
+const handler = async (req, res) =>  {
     await dbConnect(); // Подключаемся к базе данных
     if (req.method === 'GET') { // Изменяем метод на GET
         try {
@@ -16,3 +17,4 @@ export default async function handler(req, res) {
         res.status(405).end(`Метод ${req.method} не поддерживается`);
     }
 }
+export default withRole(handler, ['manager']);

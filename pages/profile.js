@@ -22,6 +22,7 @@ export default function Profile() {
         {
           user?.role != 'user' ? (
             <div className='container'>
+              <p className="title">Manage cars:</p>
               <div id='carsDiv' className='cars'>
                 <button className='btn' onClick={() => setIsAddCarVisible(!isAddCarVisible)}>
                   {isAddCarVisible ? 'Hide Add Car' : 'Show Add Car'}
@@ -39,7 +40,6 @@ export default function Profile() {
           )
         }
       </div>
-      <Socials />
     </div>
   );
 };

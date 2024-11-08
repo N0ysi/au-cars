@@ -4,8 +4,8 @@ export default function AboutUs() {
   return (
     <section id="section-AboutUs">
       <div className="container">
+        <p className="title">About us:</p>
         <div className="description">
-          <p className="title">About us:</p>
           <div className="images">
             <img src="/img/woman1.jpeg" alt="Woman 1" />
             <img src="/img/woman2.jpeg" alt="Woman 2" />

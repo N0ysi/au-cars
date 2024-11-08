@@ -47,9 +47,9 @@ export default function AddCar() {
 
     return (
         <div className="container">
+            <p className="title">Add car:</p>
             <div className="description">
                 {error && <p style={{ color: 'red' }}>{error}</p>}
-                <p className="title">Add car:</p>
                 <div className="example">
                     <form className="authForm" onSubmit={handleSubmit}>
                         <input

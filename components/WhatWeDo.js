@@ -4,8 +4,8 @@ export default function WhatWeDo() {
   return (
     <section id="section-WhatWeDo">
       <div className="container">
+        <p className="title">What we do:</p>
         <div className="description">
-          <p className="title">What we do:</p>
           <div className="images">
             <img src="/img/touareg.jpg" alt="Touareg" className="carImg" />
             <img src="/img/salesman.jpg" alt="Salesman" className="carImg" />

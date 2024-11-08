@@ -1,7 +1,8 @@
 import dbConnect from '../../../utils/dbConnect';
 import Car from '@/models/Car';
+import { withRole } from '../../../utils/auth';
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
 
     if (req.method === 'POST') {
         let { name, power, torque, transmission, carType, price, url, imgUrl, amount } = req.body;
@@ -52,3 +53,5 @@ export default async function handler(req, res) {
         res.status(405).json({ message: 'Method not allowed' });
     }
 }
+
+export default withRole(handler, ['manager']);

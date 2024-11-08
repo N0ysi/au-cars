@@ -95,8 +95,8 @@ export default function ManageUsers() {
 
     return (
         <div className="container">
+            <p className="title">Manage users:</p>
             <div id='manageUsersDiv' className="manage">
-                <p className="title">Manage users:</p>
                 {users && users.length > 0 ? (
                     users.map((mappingUser) => (
                         <div key={mappingUser._id}>
@@ -104,7 +104,7 @@ export default function ManageUsers() {
                             <button
                                 id={mappingUser._id}
                                 className="manageBtn"  // Устанавливаем класс userBtn
-                                onClick={() => { openUser(mappingUser._id);}}
+                                onClick={() => { openUser(mappingUser._id); }}
                             >
                                 {mappingUser.username}
                             </button>
