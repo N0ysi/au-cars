@@ -33,7 +33,8 @@ const handler = async (req, res) => {
                     username: username,
                     email: email,
                     password: hashedPassword,
-                    role: role
+                    role: role,
+                    favoriteCars: []
                 });
 
                 await newUser.save();

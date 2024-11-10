@@ -5,8 +5,6 @@ export default function OtherInfo() {
     const { user } = useAuth();  // Получаем информацию о пользователе
     const [cars, setCars] = useState([]);  // Состояние для хранения автомобилей
 
-    console.log('User from OtherInfo:', user);
-
     // Функция для получения автомобилей пользователя
     const getUserCars = async (userId) => {
         try {
@@ -60,9 +58,7 @@ export default function OtherInfo() {
                         </div>
                     ))
                 ) : (
-                    <div className="text">
-                        <p>You have no cars</p>
-                    </div>
+                    <p>You have no cars</p>
                 )}
             </div>
         </div>

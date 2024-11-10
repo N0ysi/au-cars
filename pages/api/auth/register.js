@@ -25,6 +25,7 @@ export default async function handler(req, res) {
         email: email,
         password: hashedPassword,
         role: 'user', // Роль по умолчанию — user
+        favoriteCars: []
       });
 
       await newUser.save();

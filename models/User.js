@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema({
     enum: ['user', 'manager'],
     default: 'user',
   },
+  favoriteCars: {
+    type: [String],
+    default: []
+  }
 });
 
 const User = mongoose.models.User || mongoose.model('User', UserSchema);

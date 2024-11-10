@@ -25,10 +25,10 @@ export default function AddUser() {
         console.log(data);
         if (res.ok) {
             console.log('success');
-            setSavedUser((prevSavedUser) => [...prevSavedUser, username]);
+            setSavedUser((prevSavedUser) => [...prevSavedUser, email]);
             setTimeout(() => {
                 setSavedUser((prevSavedUser) =>
-                    prevSavedUser.filter((username) => username !== username)
+                    prevSavedUser.filter((email) => email !== email)
                 );
             }, 2000);
         } else {
@@ -75,7 +75,8 @@ export default function AddUser() {
                             placeholder="role"
                         />
                         <button className="btn" type="submit"
-                            style={{ backgroundColor: savedUser.includes(email) ? 'green' : '' }}>Add</button>
+                            style={{ backgroundColor: savedUser.includes(email) ? 'green' : '' }}>
+                            Add</button>
                     </form>
                 </div>
             </div>

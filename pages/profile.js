@@ -7,6 +7,7 @@ import ManageUsers from '@/components/ManageUsers';
 import { useAuth } from '@/context/AuthContext';
 import ManageCars from '@/components/ManageCars';
 import { useState } from 'react';
+import FavoriteCars from '@/components/FavoriteCars';
 
 export default function Profile() {
   const { user } = useAuth();
@@ -48,7 +49,10 @@ export default function Profile() {
               </div>
             </div>
           ) : (
-            <OtherInfo />
+            <div className='container'>
+              <OtherInfo />
+              <FavoriteCars />
+            </div>
           )
         }
       </div>

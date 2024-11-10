@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 export default function NewCars() {
   const [cars, setCars] = useState([]);
   const { user } = useAuth();
+  const [favoriteCars, setFavoriteCars] = useState([]);
 
   const buyCar = async (carId) => {
     const userId = user?.userId; // Или user?.userId в зависимости от структуры
@@ -61,8 +62,69 @@ export default function NewCars() {
     }
   };
 
+  const getFavoriteCars = async () => {
+    const userId = user?.userId;
+    if (!userId) return;
+
+    try {
+      const res = await fetch(`/api/cars/getFavoriteCars`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ userId })
+      });
+      const data = await res.json();
+      if (res.ok && data && Array.isArray(data.favoriteCars)) {
+        setFavoriteCars(data.favoriteCars.map(car => car._id)); // Сохраняем только ID автомобилей
+      } else {
+        console.error("Полученные данные не являются массивом:", data);
+        setFavoriteCars([]);
+      }
+    } catch (error) {
+      console.error('Error fetching user cars:', error);
+    }
+  };
+
+
+  const toggleFavorite = async (carId) => {
+    const userId = user?.userId;
+    if (!userId) {
+      console.error("User ID is missing!");
+      return;
+    }
+
+    const isFavorite = favoriteCars.includes(carId);
+    try {
+      const res = await fetch(isFavorite ? '/api/cars/removeFromFavorites' : '/api/cars/addToFavorites', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ carId, userId }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        if (isFavorite) {
+          // Удаляем автомобиль из избранного
+          setFavoriteCars((prev) => prev.filter(id => id !== carId));
+        } else {
+          // Добавляем автомобиль в избранное
+          setFavoriteCars((prev) => [...prev, carId]);
+        }
+      } else {
+        console.error(`Error ${isFavorite ? 'removing' : 'adding'} car to favorites:`, data.error);
+      }
+    } catch (error) {
+      console.error(`Error ${isFavorite ? 'removing' : 'adding'} car to favorites:`, error);
+    }
+  };
+
+
   useEffect(() => {
     getOurCars();
+    getFavoriteCars();
   }, []);
 
   return (
@@ -82,12 +144,21 @@ export default function NewCars() {
                   <b>Vehicle type:</b> {car.carType}<br />
                   <b>Price:</b> {car.price}
                 </p>
-                <button className="btn" onClick={() => window.open(car.url)}>
-                  Read more
-                </button>
-                <button id={car._id} className='btn' onClick={() => buyCar(car._id)}>
-                  Buy
-                </button>
+                <div className='buttons'>
+                  <button className="btn" onClick={() => window.open(car.url)}>
+                    Read more
+                  </button>
+                  <button id={car._id} className='btn' onClick={() => buyCar(car._id)}>
+                    Buy
+                  </button>
+                  <button className="btn" onClick={() => toggleFavorite(car._id)}>
+                    {favoriteCars.includes(car._id) ? (
+                      <img id='saved' src='/img/saved.png' alt="Saved" style={{ display: 'block' }} />
+                    ) : (
+                      <img id='notSaved' src='/img/heart.svg' alt="Not Saved" style={{ display: 'block' }} />
+                    )}
+                  </button>
+                </div>
               </div>
             ))
           ) : (
