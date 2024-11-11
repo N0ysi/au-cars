@@ -6,19 +6,18 @@ import AboutUs from '../components/AboutUs';
 import Socials from '../components/Socials';
 import { useEffect } from 'react';
 
-
 export default function HomePage() {
   useEffect(() => {
     document.documentElement.style.height = 'auto';
   }, [])
   return (
-    <div>
-      <Header />
-      <Home />
-      <WhatWeDo />
-      <NewCars />
-      <AboutUs />
-      <Socials />
-    </div>
+      <div>
+        <Header />
+        <Home />
+        <WhatWeDo />
+        <NewCars />
+        <AboutUs />
+        <Socials />
+      </div>
   );
 }

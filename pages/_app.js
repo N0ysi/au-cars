@@ -2,7 +2,6 @@ import '../styles/globals.css';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AuthProvider } from '../context/AuthContext';
-import { Analytics } from "@vercel/analytics/react"
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -19,11 +18,9 @@ function MyApp({ Component, pageProps }) {
   }, [router]);
 
   return (
-    <AuthProvider>
-      <Analytics>
+      <AuthProvider>
         <Component {...pageProps} />
-      </Analytics>
-    </AuthProvider>
+      </AuthProvider>
   );
 }
 
