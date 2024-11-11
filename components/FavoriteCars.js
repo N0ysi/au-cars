@@ -61,16 +61,16 @@ export default function FavoriteCars() {
         }
     };
 
-    const toggleFavorite = async (carId) => {
+    const removeFromFavorites = async (carId) => {
         const userId = user?.userId;
         if (!userId) {
             console.error("User ID is missing!");
             return;
         }
 
-        const isFavorite = favoriteCars.includes(carId);
+
         try {
-            const res = await fetch(isFavorite ? '/api/cars/removeFromFavorites' : '/api/cars/addToFavorites', {
+            const res = await fetch('/api/cars/removeFromFavorites', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,18 +80,13 @@ export default function FavoriteCars() {
 
             const data = await res.json();
             if (res.ok) {
-                if (isFavorite) {
-                    // Удаляем автомобиль из избранного
-                    setFavoriteCars((prev) => prev.filter(id => id !== carId));
-                } else {
-                    // Добавляем автомобиль в избранное
-                    setFavoriteCars((prev) => [...prev, carId]);
-                }
+                // Удаляем автомобиль из избранного
+                setCars((prev) => prev.filter(car => car._id !== carId));
             } else {
-                console.error(`Error ${isFavorite ? 'removing' : 'adding'} car to favorites:`, data.error);
+                console.error(`Error removing car from favorites:`, data.error);
             }
         } catch (error) {
-            console.error(`Error ${isFavorite ? 'removing' : 'adding'} car to favorites:`, error);
+            console.error(`Error removing car from favorites:`, error);
         }
     };
 
@@ -110,14 +105,14 @@ export default function FavoriteCars() {
                     cars.map((car) => (
                         <div key={car._id} className="example">
                             <img src={car.imgUrl} alt={car.name} className="car_img" />
-                            <p className="name">{car.name}</p>
-                            <p className="specs">
-                                <b>Power:</b> {car.power}<br />
-                                <b>Torque:</b> {car.torque}<br />
-                                <b>Transmission:</b> {car.transmission}<br />
-                                <b>Vehicle type:</b> {car.carType}<br />
-                                <b>Price:</b> {car.price}
-                            </p>
+                            <div className="specs">
+                                <p className="name">{car.name}</p>
+                                <p><b>Power:</b> {car.power}<br /></p>
+                                <p><b>Torque:</b> {car.torque}<br /></p>
+                                <p><b>Transmission:</b> {car.transmission}<br /></p>
+                                <p><b>Vehicle type:</b> {car.carType}<br /></p>
+                                <p><b>Price:</b> {car.price}</p>
+                            </div>
                             <div className='buttons'>
                                 <button className="btn" onClick={() => window.open(car.url)}>
                                     Read more
@@ -125,12 +120,8 @@ export default function FavoriteCars() {
                                 <button id={car._id} className='btn' onClick={() => buyCar(car._id)}>
                                     Buy
                                 </button>
-                                <button className="btn" onClick={() => toggleFavorite(car._id)}>
-                                    {favoriteCars.includes(car._id) ? (
-                                        <img id='saved' src='/img/saved.png' alt="Saved" style={{ display: 'block' }} />
-                                    ) : (
-                                        <img id='notSaved' src='/img/heart.svg' alt="Not Saved" style={{ display: 'block' }} />
-                                    )}
+                                <button className="btn" onClick={() => removeFromFavorites(car._id)}>
+                                    <img id='saved' src='/img/saved.png' alt="Saved" style={{ display: 'block' }} />
                                 </button>
                             </div>
                         </div>

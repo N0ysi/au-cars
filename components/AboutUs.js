@@ -13,7 +13,7 @@ export default function AboutUs() {
             <img src="/img/interview.jpg" alt="Interview" />
           </div>
           <div className='text'>
-            <p>
+            <p className='descr'>
               Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vestibulum erat nulla, ullamcorper nec,
               rutrum non, nonummy ac, erat. Aliquam erat volutpat. Mauris tincidunt sem sed arcu. Maecenas lorem.
               Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et

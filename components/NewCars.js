@@ -122,6 +122,24 @@ export default function NewCars() {
   };
 
 
+  const changeView = () => {
+    const divs = Array.from(document.getElementsByClassName('example'));
+    const isExpanded = divs.length === 0;
+
+    if (isExpanded) {
+      const bigDivs = Array.from(document.getElementsByClassName('exampleBig'));
+      bigDivs.forEach(div => {
+        div.className = 'example';
+      });
+      document.querySelector('.viewImg').src = '/img/view.svg';
+    } else {
+      divs.forEach(div => {
+        div.className = 'exampleBig';
+      });
+      document.querySelector('.viewImg').src = '/img/large.png';
+    }
+  };
+
   useEffect(() => {
     getOurCars();
     getFavoriteCars();
@@ -130,20 +148,25 @@ export default function NewCars() {
   return (
     <section id="section-NewCars">
       <div className="container">
-        <p className="title">New interesting cars:</p>
+        <div className='view'>
+          <p className="title">New interesting cars:</p>
+          <button className='viewBtn' onClick={() => changeView()}>
+            <img className='viewImg' src='/img/view.svg' />
+          </button>
+        </div>
         <div className="description">
           {cars && cars.length > 0 ? (
             cars.map((car) => (
               <div key={car._id} className="example">
                 <img src={car.imgUrl} alt={car.name} />
-                <p className="name">{car.name}</p>
-                <p className="specs">
-                  <b>Power:</b> {car.power}<br />
-                  <b>Torque:</b> {car.torque}<br />
-                  <b>Transmission:</b> {car.transmission}<br />
-                  <b>Vehicle type:</b> {car.carType}<br />
-                  <b>Price:</b> {car.price}
-                </p>
+                <div className="specs">
+                  <p className="name">{car.name}</p>
+                  <p><b>Power:</b> {car.power}<br /></p>
+                  <p><b>Torque:</b> {car.torque}<br /></p>
+                  <p><b>Transmission:</b> {car.transmission}<br /></p>
+                  <p><b>Vehicle type:</b> {car.carType}<br /></p>
+                  <p><b>Price:</b> {car.price}</p>
+                </div>
                 <div className='buttons'>
                   <button className="btn" onClick={() => window.open(car.url)}>
                     Read more

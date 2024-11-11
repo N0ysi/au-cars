@@ -330,6 +330,28 @@ p.title {
     margin-bottom: 10px;
 }
 
+.view {
+    display: grid;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-items: center;
+}
+
+.viewBtn {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.viewImg {
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    max-width: 35px;
+}
+
 .example {
     display: inline-grid;
     justify-items: center;
@@ -360,18 +382,42 @@ p.title {
     margin: 5px 0;
 }
 
+.specs {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.specs .name {
+    text-align: center;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.specs p {
+    text-align: center;
+}
+
 .buttons {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    height: fit-content;
+    gap: 10px;
 }
 
-.buttons .btn{
-    margin: 0;;
+.buttons .btn {
+    margin: 0;
 }
 
-.buttons .btn:has(img){
+.example .buttons .btn:has(img) {
     position: absolute;
     right: 10%;
     border: none;
@@ -380,30 +426,95 @@ p.title {
     padding: 0;
 }
 
-.buttons img{
+.buttons img {
     border: none;
     border-radius: 0;
 }
 
-img#notSaved,#saved{
+img#notSaved,
+#saved {
     width: 100%;
+    margin: 0;
 }
 
-img#saved{
+img#saved {
     display: none;
-    color: red;
 }
 
-p.name {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 11px;
-    font-style: normal;
-    font-weight: bold;
+.exampleBig {
+    display: flex;
+    justify-items: center;
+    width: 100%;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 40px;
+    max-height: 440px;
+    border-style: groove;
+    border-color: var(--border-color);
+    color: var(--foreground);
+    filter: drop-shadow(5px 10px 7px rgba(0, 0, 0, 0.5));
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
-p.specs {
-    text-align: center;
+.exampleBig img {
+    border-color: var(--border-color);
+    border-radius: 100px;
+    width: 50%;
+    filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.5));
+}
+
+.exampleBig p {
+    margin: 0;
+    font-size: 10px;
+    text-decoration: none;
+}
+
+.exampleBig .specs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+
+.exampleBig .buttons {
+    display: flex;
+    width: auto;
+    gap: 15px;
+    margin-bottom: 10%;
+    flex-direction: column;
+}
+
+.exampleBig .buttons img {
+    border: none;
+    border-radius: 0;
+}
+
+.exampleBig .buttons .btn:has(img) {
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    width: 10%;
+    padding: 0;
+    bottom: 20%;
+}
+
+@media (min-width: 650px) {
+    .example{
+        height: 450px;
+    }
+
+     .specs .name {
+        font-size: 20px;
+    }
+
+     .specs p {
+        font-size: 18px;
+    }
 }
 
 @media (min-width:900px) {
@@ -424,7 +535,6 @@ p.specs {
     }
 
     .example {
-        /* width: auto; */
         height: 650px;
     }
 
@@ -446,35 +556,48 @@ p.specs {
         align-items: center;
         justify-content: center;
     }
-    
-    .buttons .btn:has(img){
+
+    .buttons .btn:has(img) {
         border: none;
         background-color: transparent;
         width: 10%;
         padding: 0;
     }
-    
-    .buttons img{
+
+    .buttons img {
         border: none;
         border-radius: 0;
     }
-    
-    img#notSaved,#saved{
+
+    img#notSaved,
+    #saved {
         width: 100%;
     }
-    
-    img#saved{
+
+    img#saved {
         display: none;
         color: red;
     }
 
-    p.name {
-        margin: 10px 0;
+    .example .specs p.name {
+        margin-bottom: 10px;
         font-size: 30px;
     }
 
-    p.specs {
+    .exampleBig .specs p.name {
+        font-size: 30px;
+    }
+
+    .specs p {
         font-size: 21px;
+    }
+
+    .exampleBig .specs p {
+        font-size: 21px;
+    }
+
+    .exampleBig {
+        gap: 25px;
     }
 }
 
@@ -652,7 +775,7 @@ time {
     font-size: 20px;
 }
 
-@media (min-width: 900px){
+@media (min-width: 900px) {
     .userInfo p {
         font-size: 35px;
     }

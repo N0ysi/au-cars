@@ -11,7 +11,7 @@ export default function WhatWeDo() {
             <img src="/img/salesman.jpg" alt="Salesman" className="carImg" />
           </div>
           <div className='text'>
-            <p>
+            <p className='descr'>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ante sem, vestibulum eu tellus
               bibendum, fermentum ornare arcu. Cras posuere metus sed ligula suscipit viverra. Quisque
               ullamcorper gravida mollis. Praesent porta a felis pellentesque scelerisque. Phasellus ut rutrum
