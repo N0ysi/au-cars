@@ -7,7 +7,7 @@ export default function Home() {
         <div className="home">
           <div className="subhome">
             <h1 className="title">Welcome to Au cars</h1>
-            <img src="/img/dealership.jpg" alt="Dealership" />
+            <img src="/img/Dealership.jpg" alt="Dealership" />
             <div className='text'>
               <p className="descr">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam scelerisque diam eu pellentesque pharetra. Praesent vel finibus lectus. Nullam efficitur turpis mauris, nec lacinia erat mollis quis. Morbi non nulla eget sapien vehicula tristique. Suspendisse justo turpis, suscipit nec pulvinar fermentum, convallis eget tortor. Curabitur urna mi, maximus non aliquet quis, consectetur nec purus. Sed sed enim risus.
