@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Header from '@/components/Header';
@@ -36,13 +36,13 @@ const Register = () => {
     };
 
     return (
-        <div className='authorize'>
+        <div>
             <Header />
             <div className="authDiv">
                 <img src='/img/login.svg' alt="Register" />
                 <h1 className="title">Register</h1>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
-                <form className="authForm" onSubmit={handleSubmit}>
+                <form className="paymentForm" onSubmit={handleSubmit}>
                     <input
                         type="username"
                         value={username}

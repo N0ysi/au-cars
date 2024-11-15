@@ -69,10 +69,14 @@ a {
     color: var(--foreground);
 }
 
+form input {
+    background-color: white;
+}
+
 .btn {
     cursor: pointer;
     display: flex;
-    width: 80px;
+    width: 100px;
     height: 25px;
     font-weight: bold;
     font-size: 10px;
@@ -113,10 +117,10 @@ a {
 }
 
 header {
-    width: 100%;
+    width: -webkit-fill-available;
     min-width: 360px;
     background-color: var(--background2);
-    height: 120px;
+    height: 150px;
     padding: 0 5px;
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
@@ -145,14 +149,6 @@ nav {
 }
 
 @media(min-width: 600px) {
-    header {
-        position: sticky;
-        z-index: 2;
-        top: 5px;
-        margin: 0 5px;
-        border-radius: 20px;
-        height: 170px;
-    }
 
     .navigation img {
         width: 160px;
@@ -409,8 +405,10 @@ p.title {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    height: -moz-fit-content;
     height: fit-content;
     gap: 10px;
+    flex-direction: column;
 }
 
 .buttons .btn {
@@ -504,16 +502,29 @@ img#saved {
 }
 
 @media (min-width: 650px) {
-    .example{
+    .example {
         height: 450px;
     }
 
-     .specs .name {
+    .specs .name {
         font-size: 20px;
     }
 
-     .specs p {
+    .specs p {
         font-size: 18px;
+    }
+
+    .buttons {
+        flex-direction: row;
+    }
+
+    .example .buttons .btn:has(img) {
+        position: absolute;
+        right: 5%;
+        border: none;
+        background-color: transparent;
+        width: 10%;
+        padding: 0;
     }
 }
 
@@ -576,7 +587,6 @@ img#saved {
 
     img#saved {
         display: none;
-        color: red;
     }
 
     .example .specs p.name {
@@ -689,7 +699,8 @@ time {
     }
 }
 
-.authDiv {
+.authDiv,
+.paymentDiv {
     margin: 20px;
     min-width: 340px;
     display: grid;
@@ -703,7 +714,17 @@ time {
     width: 30%;
 }
 
-.authForm {
+.paymentDiv img {
+    width: 30%;
+    margin-bottom: 20px;
+}
+
+.paymentDiv .title {
+    margin-bottom: 20px;
+}
+
+.authForm,
+.paymentForm {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -719,19 +740,31 @@ time {
     filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.5));
 }
 
-.authForm input {
+.authForm input,
+.paymentForm input {
     margin: 5px;
-    width: 100%;
+    width: 50%;
     padding: 10px;
     border-style: groove;
     border-width: 5px;
     border-color: var(--border-color);
 }
 
-.authForm input:focus-within {
+.authForm input:focus-within,
+.paymentForm input:focus-within {
     border-color: #58df78;
 }
 
+.paymentDiv label {
+    color: #FFFFFF;
+    font-size: 30px;
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+.paymentDiv .buttons {
+    margin-top: 20px;
+}
 
 .login {
     display: grid;
@@ -797,53 +830,88 @@ time {
 
 .cars,
 .users {
+    width: -webkit-fill-available;
     display: grid;
     justify-items: center;
-    gap: 10px
+    margin: 0 5px;
+    gap: 10px;
+    scroll-behavior: smooth;
 }
 
 .manage {
+    scrollbar-width: thin;
+    scrollbar-color: var(--background2);
+    overflow-x: hidden;
+    border: solid;
+    border-radius: 10px;
+    border-color: var(--background2);
     margin: 10px 0;
-    height: auto;
     display: grid;
-    justify-items: center;
-    align-items: center;
-    justify-content: center;
-}
-
-.manage div {
-    width: auto;
 }
 
 .manage button {
     margin: 10px 10px;
 }
 
-.manageBtn {
-    cursor: pointer;
-    height: 50px;
-    min-width: 250px;
-    width: auto;
+.manageUl{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+}
+
+.manageLi{
+    list-style-type: none;
+    margin: 10px;
+    border-bottom: solid;
+    font-size: 20px;
     font-weight: bold;
-    font-size: 18px;
-    line-height: 25px;
-    white-space: nowrap;
-    border-style: groove;
-    border-radius: 100px;
-    padding: 0px 24px;
-    background: var(--background);
+}
+
+.listDiv{
+    margin-left: 5px;
+}
+
+.manageDiv {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.manageDiv form, .manageLi form{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: inherit;
+    justify-items: center;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.manageDiv form img, .manageLi form img {
     border-color: var(--border-color);
-    color: var(--foreground);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+    border-radius: 100px;
+    width: 40%;
+    margin: 10px 0;
+    filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.5));
 }
 
-.manageBtn:hover {
-    background-color: var(--background2);
-    transform: scale(1.05);
+.manageDiv form .buttons, .manageLi form .buttons{
+    margin-bottom: 20px;
 }
 
-.manageBtn:active {
-    background-color: #1e7e34;
-    transform: scale(1.1);
+.manageDiv input, .manageLi input {
+    width: 100%;
+    max-width: 800px;
+    max-height: 40px;
+    margin: 5px;
+    padding: 10px;
+    border-style: groove;
+    border-width: 5px;
+    border-color: var(--border-color);
 }

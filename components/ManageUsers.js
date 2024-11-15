@@ -6,6 +6,7 @@ export default function ManageUsers() {
     const [openedUserId, setOpenedUserId] = useState(null); // Для отслеживания открытого пользователя
     const [savedUsers, setSavedUsers] = useState([]);
     const [deletedUser, setDeletedUser] = useState([]);
+    const [userHeight, setUserHeight] = useState(300);
 
     const formVariants = {
         hidden: { opacity: 0, height: 0 },
@@ -15,7 +16,13 @@ export default function ManageUsers() {
 
     const openUser = (userId) => {
         console.log('openUser id', userId);
-        setOpenedUserId((prevUserId) => (prevUserId === userId ? null : userId));
+        if (openedUserId === userId) {
+            setOpenedUserId(null); // Закрываем машину
+            setUserHeight(300); // Уменьшаем ширину
+        } else {
+            setOpenedUserId(userId); // Открываем машину
+            setUserHeight(650); // Увеличиваем ширину
+        }
     };
 
     const handleInputChange = (e, userId, field) => {
@@ -130,72 +137,79 @@ export default function ManageUsers() {
 
     return (
         <div className="container">
-            <div id='manageUsersDiv' className="manage">
+            <div
+                id='manageUsersDiv'
+                className="manage"
+                style={{ maxHeight: `${userHeight}px` }}
+            >
                 {users && users.length > 0 ? (
-                    users.map((mappingUser) => (
-                        <div key={mappingUser._id}>
-                            {/* Кнопка для открытия формы */}
-                            <button
-                                id={mappingUser._id}
-                                className="manageBtn"  // Устанавливаем класс userBtn
-                                onClick={() => { openUser(mappingUser._id); }}
-                            >
-                                {mappingUser.username}
-                            </button>
-
-                            {openedUserId === mappingUser._id && (
-                                <form
-                                    key={mappingUser._id}
-                                    className="authForm"
-                                    initial="hidden"
-                                    animate="visible"
-                                    exit="exit"
-                                    variants={formVariants}
-                                    transition={{ duration: 0.3 }}
+                    <ul className='manageUl'>
+                        {users.map((mappingUser) => (
+                            <li key={mappingUser._id} className='manageLi'>
+                                {/* Кнопка для открытия формы */}
+                                <div
+                                    id={mappingUser._id}
+                                    className="listDiv"  // Устанавливаем класс userBtn
+                                    onClick={() => { openUser(mappingUser._id); }}
                                 >
-                                    <input
-                                        type="text"
-                                        value={mappingUser.username}
-                                        onChange={(e) => handleInputChange(e, mappingUser._id, 'username')}
-                                        placeholder="Username"
-                                    />
-                                    <input
-                                        type="email"
-                                        defaultValue={mappingUser.email}
-                                        onChange={(e) => handleInputChange(e, mappingUser._id, 'email')}
-                                        placeholder="Email"
-                                    />
-                                    <input
-                                        type="password"
-                                        onChange={(e) => handleInputChange(e, mappingUser._id, 'password')}
-                                        placeholder="Password"
-                                    />
-                                    <input
-                                        type="text"
-                                        defaultValue={mappingUser.role}
-                                        onChange={(e) => handleInputChange(e, mappingUser._id, 'role')}
-                                        placeholder="Role"
-                                    />
-                                    <button className="btn" onClick={(e) => {
-                                        e.preventDefault();
-                                        saveChanges(mappingUser);
-                                    }} style={{
-                                        backgroundColor: savedUsers.includes(mappingUser._id) ? 'green' : ''
-                                    }}>
-                                        Save changes
-                                    </button>
-                                    <button className="btn" onClick={(e) => {
-                                        e.preventDefault();
-                                        deleteUser(mappingUser);
-                                    }} style={{
-                                        backgroundColor: deletedUser.includes(mappingUser._id) ? 'green' : ''
-                                    }}>
-                                        Delete
-                                    </button>
-                                </form>
-                            )}
-                        </div>
-                    ))
+                                    {mappingUser.username}
+                                </div>
+
+                                {openedUserId === mappingUser._id && (
+                                    <form
+                                        key={mappingUser._id}
+                                        initial="hidden"
+                                        animate="visible"
+                                        exit="exit"
+                                        variants={formVariants}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <input
+                                            type="text"
+                                            value={mappingUser.username}
+                                            onChange={(e) => handleInputChange(e, mappingUser._id, 'username')}
+                                            placeholder="Username"
+                                        />
+                                        <input
+                                            type="email"
+                                            defaultValue={mappingUser.email}
+                                            onChange={(e) => handleInputChange(e, mappingUser._id, 'email')}
+                                            placeholder="Email"
+                                        />
+                                        <input
+                                            type="password"
+                                            onChange={(e) => handleInputChange(e, mappingUser._id, 'password')}
+                                            placeholder="Password"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={mappingUser.role}
+                                            onChange={(e) => handleInputChange(e, mappingUser._id, 'role')}
+                                            placeholder="Role"
+                                        />
+                                        <div className='buttons'>
+                                            <button className="btn" onClick={(e) => {
+                                                e.preventDefault();
+                                                saveChanges(mappingUser);
+                                            }} style={{
+                                                backgroundColor: savedUsers.includes(mappingUser._id) ? 'green' : ''
+                                            }}>
+                                                Save changes
+                                            </button>
+                                            <button className="btn" onClick={(e) => {
+                                                e.preventDefault();
+                                                deleteUser(mappingUser);
+                                            }} style={{
+                                                backgroundColor: deletedUser.includes(mappingUser._id) ? 'green' : ''
+                                            }}>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </form>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
                 ) : (
                     <div className="text">
                         <p>(if you see this, something went wrong)</p>

@@ -42,16 +42,16 @@ export default function OtherInfo() {
             <div className="otherInfo">
                 {cars && cars.length > 0 ? (
                     cars.map((car) => (
-                        <div key={car._id} className="example">
+                        <div key={car._id} className="manageDiv">
                             <img src={car.imgUrl} alt={car.name} className="car_img" />
-                            <p className="name">{car.name}</p>
-                            <p className="specs">
-                                <b>Power:</b> {car.power}<br />
-                                <b>Torque:</b> {car.torque}<br />
-                                <b>Transmission:</b> {car.transmission}<br />
-                                <b>Vehicle type:</b> {car.carType}<br />
-                                <b>Price:</b> {car.price}
-                            </p>
+                            <div className="specs">
+                                <p className="name">{car.name}</p>
+                                <p><b>Power:</b> {car.power}<br /></p>
+                                <p><b>Torque:</b> {car.torque}<br /></p>
+                                <p><b>Transmission:</b> {car.transmission}<br /></p>
+                                <p><b>Vehicle type:</b> {car.carType}<br /></p>
+                                <p><b>Price:</b> {car.price}</p>
+                            </div>
                             <button className="btn" onClick={() => window.open(car.url)}>
                                 Read more
                             </button>

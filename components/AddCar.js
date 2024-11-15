@@ -50,8 +50,8 @@ export default function AddCar() {
             <p className="title">Add car:</p>
             <div className="description">
                 {error && <p style={{ color: 'red' }}>{error}</p>}
-                <div className="example">
-                    <form className="authForm" onSubmit={handleSubmit}>
+                <div className="manageDiv">
+                    <form onSubmit={handleSubmit}>
                         <input
                             type="name"
                             value={name}

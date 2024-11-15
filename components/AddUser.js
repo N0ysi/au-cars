@@ -45,8 +45,8 @@ export default function AddUser() {
             <p className="title">Add user:</p>
             <div className="description">
                 {error && <p style={{ color: 'red' }}>{error}</p>}
-                <div className="example">
-                    <form className="authForm" onSubmit={handleSubmit}>
+                <div className="manageDiv">
+                    <form onSubmit={handleSubmit}>
                         <input
                             type="username"
                             value={username}
