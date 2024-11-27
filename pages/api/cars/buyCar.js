@@ -23,8 +23,12 @@ export default async function handler(req, res) {
             }
 
             // Update the quantity of the existing car
-            existingCar.amount = parseInt(existingCar.amount) - 1;
-            await existingCar.save();
+            if((existingCar.amount - 1) >= 0){
+                existingCar.amount = parseInt(existingCar.amount) - 1;
+                await existingCar.save();
+            }else{
+                res.status(400).json({ message: "We don't have enough cars right now" });
+            }
 
             // Create a new car entry with the userId
             const newCar = new Car({

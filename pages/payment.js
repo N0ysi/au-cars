@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 export default function NewCars() {
     const router = useRouter();
     const { carId, price, userId } = router.query;
-    const [cardNumber, setCarNumber] = useState('');
+    const [cardNumber, setCardNumber] = useState('');
     const [cardHolderName, setCardHolderName] = useState('');
     const [cardDate, setCardDate] = useState('');
     const [CVV, setCVV] = useState('');
@@ -18,8 +18,12 @@ export default function NewCars() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (Date.parse(cardDate) < new Date()) {
+        var actualDate = new Date().toLocaleDateString();
+        actualDate = actualDate.split('.')[1] + '/' + actualDate.split('.')[2].slice(3);
+        if (Date.parse(cardDate) < Date.parse(actualDate)) {
             setError("Wrong Card Date");
+            console.error("Wrong Card Date");
+            return;
         }
 
         try {
@@ -50,13 +54,15 @@ export default function NewCars() {
                     var button = document.getElementById('payBtn');
                     button.textContent = 'bought';
                     button.style.background = 'green';
-                    setTimeout('1000ms');
+                    setTimeout(100);
                     router.push('/profile')
                 }
             } else {
-                console.error("Error purchasing car:", data.error);
+                setError(`Error:  ${data.message}`);
+                console.error("Error purchasing car:", data.message);
             }
         } catch (error) {
+            setError(`Error:  ${error}`);
             console.error('Error purchasing car:', error);
         }
     }
@@ -71,10 +77,11 @@ export default function NewCars() {
                 <label>Price: {price}</label>
                 <form className="paymentForm" onSubmit={handleSubmit}>
                     <input
-                        type="text"
+                        type="cardNumber"
                         value={cardNumber}
-                        minLength and maxLength={16}
-                        onChange={(e) => setCarNumber(e.target.value)}
+                        minLength={16}
+                        maxLength={16}
+                        onChange={(e) => setCardNumber(e.target.value)}
                         placeholder="Card Number"
                         required
                     />
@@ -95,7 +102,8 @@ export default function NewCars() {
                     <input
                         type="password"
                         value={CVV}
-                        minLength and maxLength={3}
+                        minLength={3}
+                        maxLength={3}
                         onChange={(e) => setCVV(e.target.value)}
                         placeholder="CVV"
                         required

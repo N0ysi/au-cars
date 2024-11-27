@@ -42,8 +42,8 @@ export default function OtherInfo() {
             <div className="otherInfo">
                 {cars && cars.length > 0 ? (
                     cars.map((car) => (
-                        <div key={car._id} className="manageDiv">
-                            <img src={car.imgUrl} alt={car.name} className="car_img" />
+                        <div key={car._id} className="example">
+                            <img src={car.imgUrl} alt={car.name}/>
                             <div className="specs">
                                 <p className="name">{car.name}</p>
                                 <p><b>Power:</b> {car.power}<br /></p>

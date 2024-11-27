@@ -1,40 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
 
 export default function FavoriteCars() {
+    const router = useRouter();
     const { user } = useAuth();  // Получаем информацию о пользователе
     const [cars, setCars] = useState([]);  // Состояние для хранения автомобилей
 
-    const buyCar = async (carId) => {
+    const buyCar = async (carId, price) => {
         const userId = user?.userId; // Или user?.userId в зависимости от структуры
-        if (!userId) {
-            console.error("User ID is missing!");
+        if (!userId || user.role == 'manager') {
+            console.error("User ID is missing! or invalid role");
             return; // Остановим выполнение, если userId нет
         }
-
-        console.log(`Buying car with ID: carId: ${carId} | userId: ${userId}`);
-        try {
-            const res = await fetch('/api/cars/buyCar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ carId, userId }),
-            });
-
-            const data = await res.json();
-            console.log('data', data);
-
-            if (res.ok) {
-                var button = document.getElementById(carId);
-                button.textContent = 'bought';
-                button.style.background = 'green';
-            } else {
-                console.error("Error purchasing car:", data.error);
-            }
-        } catch (error) {
-            console.error('Error purchasing car:', error);
-        }
+        console.log('Navigating to payment...');
+        await router.push({
+            pathname: '/payment',
+            query: { carId, price, userId }
+        });
     };
 
     // Функция для получения автомобилей пользователя
@@ -117,7 +100,7 @@ export default function FavoriteCars() {
                                 <button className="btn" onClick={() => window.open(car.url)}>
                                     Read more
                                 </button>
-                                <button id={car._id} className='btn' onClick={() => buyCar(car._id)}>
+                                <button id={car._id} className='btn' onClick={() => buyCar(car._id, car.price)}>
                                     Buy
                                 </button>
                                 <button className="btn" onClick={() => removeFromFavorites(car._id)}>

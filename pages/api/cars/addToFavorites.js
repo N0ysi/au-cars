@@ -26,6 +26,13 @@ export default async function handler(req, res) {
                 existingUser.favoriteCars = []; // Инициализация, если массив отсутствует
             }
 
+            if(existingUser.favoriteCars.includes(carId)){   
+                res.status(400).json({
+                    success: false,
+                    data: existingUser,
+                    message: 'Car already in favorites',
+                });
+            }
             // Update the quantity of the existing car
             existingUser.favoriteCars.push(carId);
             existingUser.save();

@@ -10,7 +10,7 @@
     --hamburger-gap: 6px;
     --hamburger-margin: 8px;
     --foreground: #000000;
-    --foreground2: #232931;
+    --foreground2: #999999;
     --background: #999999;
     --background2: #3b3939;
     --border-color: #B4B8AB;
@@ -60,13 +60,9 @@ img {
     border-color: var(--border-color);
 }
 
-img:hover {
-    transform: scale(1.05);
-}
-
 a {
     text-decoration: none;
-    color: var(--foreground);
+    color: var(--foreground2);
 }
 
 form input {
@@ -642,7 +638,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--foreground);
+    color: var(--foreground2);
 }
 
 .information p {

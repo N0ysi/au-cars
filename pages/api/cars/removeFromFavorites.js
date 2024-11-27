@@ -7,9 +7,9 @@ export default async function handler(req, res) {
 
         console.log('removeFromFavorites');
 
-        // Check for required data
+        // Validate input
         if (!carId || !userId) {
-            res.status(400).json({ message: 'carId and userId are required' });
+            return res.status(400).json({ message: 'carId and userId are required' });
         }
 
         try {
@@ -20,30 +20,37 @@ export default async function handler(req, res) {
             const existingUser = await User.findById(userId);
 
             if (!existingUser) {
-                // User not found
-                res.status(404).json({ message: 'User not found' });
+                return res.status(404).json({ message: 'User not found' });
             }
+
 
             // Check if the car is in the user's favorites
             if (!existingUser.favoriteCars.includes(carId)) {
-                return res.status(404).json({ message: 'Car not found in favorites' });
+                return res.status(200).json({
+                    success: true,
+                    data: existingUser
+                });
             }
-
+            
             // Remove the car from the favorites
             existingUser.favoriteCars = existingUser.favoriteCars.filter(id => id !== carId);
-            existingUser.save();            
 
-            // Send a success response
-            res.status(201).json({
+            // Save changes
+            await existingUser.save();
+
+            // Send success response
+            return res.status(200).json({
                 success: true,
                 data: existingUser,
-                message: 'Car added to favorites successfully',
+                message: 'Car removed from favorites successfully',
             });
 
         } catch (error) {
-            // Handle errors
-            console.error("Error during adding:", error);
-            res.status(500).json({ message: 'Server error', error: error.message });
+            console.error("Error during removeFromFavorites:", error);
+            res.status(500).json({
+                message: 'Internal Server Error',
+                error: error.message
+            });
         }
 
     } else {
