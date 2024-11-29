@@ -30,7 +30,7 @@ html {
 body {
     height: auto;
     margin: 0;
-    min-width: 340px;
+    min-width: 320px;
     display: flex;
     flex-wrap: wrap;
     align-content: space-evenly;
@@ -55,7 +55,7 @@ div {
 }
 
 img {
-    border-style: groove;
+    border-style: double;
     border-radius: 20px;
     border-color: var(--border-color);
 }
@@ -72,20 +72,20 @@ form input {
 .btn {
     cursor: pointer;
     display: flex;
-    width: 100px;
+    width: 110px;
     height: 25px;
     font-weight: bold;
     font-size: 10px;
     white-space: nowrap;
-    border-style: groove;
+    border-style: solid;
+    background-color: #645f5f;
     border-radius: 100px;
     padding: 0px 10px;
-    background: var(--background);
     border-color: var(--border-color);
     color: var(--foreground);
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
@@ -98,27 +98,18 @@ form input {
     .btn {
         width: auto;
         height: 50px;
-        font-weight: bold;
         font-size: 18px;
-        white-space: nowrap;
-        border-style: groove;
-        border-radius: 100px;
-        padding: 0px 24px;
-        background: var(--background);
-        border-color: var(--border-color);
-        color: var(--foreground);
-        filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
         transition: background-color 0.3s ease, transform 0.3s ease;
     }
 }
 
 header {
     width: -webkit-fill-available;
-    min-width: 360px;
+    min-width: inherit;
     background-color: var(--background2);
     height: 150px;
     padding: 0 5px;
-    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
 
 .navigation {
@@ -162,7 +153,7 @@ nav {
         width: max-content;
         font-size: 17px;
         margin: 5px 0;
-        filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+        text-shadow: 5px 10px 8px rgba(0, 0, 0, 0.8);
     }
 
     nav a:hover {
@@ -264,6 +255,7 @@ h2.title {
     font-style: normal;
     font-weight: bold;
     font-size: 30px;
+    margin-bottom: 15px;
     color: var(--foreground);
 }
 
@@ -274,12 +266,13 @@ h2.title {
     font-weight: bold;
     font-size: 50px;
     color: var(--foreground);
-    filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
+    text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.8);
 }
 
 .home img {
+    margin-bottom: 10px;
     width: 70%;
-    filter: drop-shadow(0px 4px 15px rgba(0, 0, 0, 0.5));
+    box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.8);
 }
 
 p {
@@ -287,8 +280,7 @@ p {
 }
 
 .text {
-    margin: 10px 0;
-    padding: 15px;
+    padding: 0 15px;
     color: var(--foreground);
     border-color: var(--border-color);
 }
@@ -309,6 +301,7 @@ p {
     font-weight: normal;
     font-size: 15px;
     line-height: 31px;
+    text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.8);
 }
 
 .description button {
@@ -348,20 +341,19 @@ p.title {
     display: inline-grid;
     justify-items: center;
     width: 40%;
-    padding: 15px;
-    border-radius: 40px;
-    height: 350px;
+    padding: 5px;
+    height: 360px;
     border-style: groove;
     border-color: var(--border-color);
     color: var(--foreground);
-    filter: drop-shadow(5px 10px 7px rgba(0, 0, 0, 0.5));
+    align-items: center;
+    align-content: space-evenly;
 }
 
 .example img {
     border-color: var(--border-color);
     border-radius: 100px;
     width: 100%;
-    filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.5));
 }
 
 .example p {
@@ -409,14 +401,15 @@ p.title {
 
 .buttons .btn {
     margin: 0;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
 }
 
 .example .buttons .btn:has(img) {
-    position: absolute;
     right: 10%;
     border: none;
     background-color: transparent;
-    width: 10%;
+    box-shadow: none;
+    width: 15%;
     padding: 0;
 }
 
@@ -441,12 +434,10 @@ img#saved {
     width: 100%;
     padding: 10px;
     gap: 10px;
-    border-radius: 40px;
     max-height: 440px;
     border-style: groove;
     border-color: var(--border-color);
     color: var(--foreground);
-    filter: drop-shadow(5px 10px 7px rgba(0, 0, 0, 0.5));
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -456,7 +447,6 @@ img#saved {
     border-color: var(--border-color);
     border-radius: 100px;
     width: 50%;
-    filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.5));
 }
 
 .exampleBig p {
@@ -477,10 +467,14 @@ img#saved {
 
 .exampleBig .buttons {
     display: flex;
-    width: auto;
-    gap: 15px;
-    margin-bottom: 10%;
+    width: min-content;
     flex-direction: column;
+}
+
+.exampleBig .buttons .btn {
+    text-wrap: wrap;
+    height: max-content;
+    width: min-content;
 }
 
 .exampleBig .buttons img {
@@ -489,17 +483,16 @@ img#saved {
 }
 
 .exampleBig .buttons .btn:has(img) {
-    position: absolute;
     border: none;
+    box-shadow: none;
     background-color: transparent;
-    width: 10%;
+    width: 30%;
     padding: 0;
-    bottom: 20%;
 }
 
-@media (min-width: 650px) {
+@media (min-width: 600px) {
     .example {
-        height: 450px;
+        height: 500px;
     }
 
     .specs .name {
@@ -514,13 +507,14 @@ img#saved {
         flex-direction: row;
     }
 
+    .exampleBig .buttons .btn {
+        width: 70px;
+        height: 40px;
+        font-size: 15px;
+    }
+
     .example .buttons .btn:has(img) {
-        position: absolute;
-        right: 5%;
-        border: none;
-        background-color: transparent;
         width: 10%;
-        padding: 0;
     }
 }
 
@@ -565,10 +559,7 @@ img#saved {
     }
 
     .buttons .btn:has(img) {
-        border: none;
-        background-color: transparent;
         width: 10%;
-        padding: 0;
     }
 
     .buttons img {
@@ -583,6 +574,10 @@ img#saved {
 
     img#saved {
         display: none;
+    }
+
+    .exampleBig {
+        gap: 15px;
     }
 
     .example .specs p.name {
@@ -602,8 +597,11 @@ img#saved {
         font-size: 21px;
     }
 
-    .exampleBig {
-        gap: 25px;
+    .exampleBig .buttons .btn {
+        text-wrap: nowrap;
+        width: auto;
+        height: 40px;
+        font-size: 15px;
     }
 }
 
@@ -623,12 +621,13 @@ img#saved {
 }
 
 footer {
+    width: 100%;
     padding: 5px;
+    margin-bottom: 30px;
     background-color: var(--background2);
     border-color: var(--border-color);
     border-style: groove;
     border-radius: 10px;
-    width: 100%;
     align-items: center;
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
 }
@@ -659,6 +658,7 @@ time {
 }
 
 .social_btn {
+    cursor: pointer;
     width: 50px;
     border-radius: 100px;
     padding: 0px 12px;
@@ -697,6 +697,7 @@ time {
 
 .authDiv,
 .paymentDiv {
+    width: auto;
     margin: 20px;
     min-width: 340px;
     display: grid;
@@ -849,7 +850,7 @@ time {
     margin: 10px 10px;
 }
 
-.manageUl{
+.manageUl {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -858,7 +859,7 @@ time {
     flex-direction: column;
 }
 
-.manageLi{
+.manageLi {
     list-style-type: none;
     margin: 10px;
     border-bottom: solid;
@@ -866,7 +867,7 @@ time {
     font-weight: bold;
 }
 
-.listDiv{
+.listDiv {
     margin-left: 5px;
 }
 
@@ -877,7 +878,8 @@ time {
     flex-wrap: wrap;
 }
 
-.manageDiv form, .manageLi form{
+.manageDiv form,
+.manageLi form {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -889,7 +891,8 @@ time {
     align-items: center;
 }
 
-.manageDiv form img, .manageLi form img {
+.manageDiv form img,
+.manageLi form img {
     border-color: var(--border-color);
     border-radius: 100px;
     width: 40%;
@@ -897,11 +900,13 @@ time {
     filter: drop-shadow(10px 20px 15px rgba(0, 0, 0, 0.5));
 }
 
-.manageDiv form .buttons, .manageLi form .buttons{
+.manageDiv form .buttons,
+.manageLi form .buttons {
     margin-bottom: 20px;
 }
 
-.manageDiv input, .manageLi input {
+.manageDiv input,
+.manageLi input {
     width: 100%;
     max-width: 800px;
     max-height: 40px;

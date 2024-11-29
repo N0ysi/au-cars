@@ -27,7 +27,7 @@ export default async function handler(req, res) {
                 existingCar.amount = parseInt(existingCar.amount) - 1;
                 await existingCar.save();
             }else{
-                res.status(400).json({ message: "We don't have enough cars right now" });
+                res.status(400).json({ message: "This car is not availible right now" });
             }
 
             // Create a new car entry with the userId
