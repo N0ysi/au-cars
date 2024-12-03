@@ -20,7 +20,7 @@ export default function NewCars() {
 
         var actualDate = new Date().toLocaleDateString();
         actualDate = actualDate.split('.')[1] + '/' + actualDate.split('.')[2].slice(3);
-        if (Date.parse(cardDate) < Date.parse(actualDate)) {
+        if (cardDate < Date.parse(actualDate)) {
             setError("Wrong Card Date");
             console.error("Wrong Card Date");
             return;
