@@ -155,7 +155,7 @@ export default function NewCars() {
                   <button className="btn" onClick={() => window.open(car.url)}>
                     Read more
                   </button>
-                  <button id={car._id} className='btn' onClick={() => buyCar(car._id, car.price)}>
+                  <button id={car._id} className='buyBtn' onClick={() => buyCar(car._id, car.price)}>
                     Buy
                   </button>
                   <button className="btn" onClick={() => toggleFavorite(car._id)}>

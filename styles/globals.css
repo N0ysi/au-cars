@@ -10,10 +10,13 @@
     --hamburger-gap: 6px;
     --hamburger-margin: 8px;
     --foreground: #000000;
-    --foreground2: #999999;
-    --background: #999999;
-    --background2: #3b3939;
-    --border-color: #B4B8AB;
+    --foreground2: #eb5e28;
+    --foreground3: #FFFFFF;
+    --background: #FFFFFF;
+    --background2: #000000;
+    --background3: #eb5e28;
+    --border-color: #000000;
+    --hover-color: #ffffff;
     --border-radius: 100px;
     --animation-timing: 200ms ease-in-out;
     --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
@@ -55,7 +58,7 @@ div {
 }
 
 img {
-    border-style: double;
+    border-style: solid;
     border-radius: 20px;
     border-color: var(--border-color);
 }
@@ -78,11 +81,31 @@ form input {
     font-size: 10px;
     white-space: nowrap;
     border-style: solid;
-    background-color: #645f5f;
+    background-color: var(--background2);
     border-radius: 100px;
     padding: 0px 10px;
     border-color: var(--border-color);
-    color: var(--foreground);
+    color: var(--foreground3);
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.buyBtn {
+    cursor: pointer;
+    display: flex;
+    width: 110px;
+    height: 25px;
+    font-weight: bold;
+    font-size: 10px;
+    white-space: nowrap;
+    border-style: solid;
+    background-color: #780000;
+    border-radius: 100px;
+    padding: 0px 10px;
+    border-color: var(--border-color);
+    color: var(--foreground3);
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
@@ -90,12 +113,17 @@ form input {
 }
 
 .btn:hover {
-    background-color: var(--background2);
+    transform: scale(1.05);
+}
+
+.buyBtn:hover {
     transform: scale(1.05);
 }
 
 @media (min-width: 900px) {
-    .btn {
+
+    .btn,
+    .buyBtn {
         width: auto;
         height: 50px;
         font-size: 18px;
@@ -122,6 +150,7 @@ header {
 
 .navigation img {
     width: 140px;
+    background-color: var(--foreground2);
 }
 
 nav {
@@ -133,6 +162,15 @@ nav {
     display: grid;
     height: inherit;
     align-content: center;
+}
+
+.header-buttons button {
+    background-color: var(--background3);
+    color: var(--foreground);
+}
+
+.header-buttons button:hover {
+    background-color: var(--hover-color);
 }
 
 @media(min-width: 600px) {
@@ -158,6 +196,7 @@ nav {
 
     nav a:hover {
         transform: scale(1.05);
+        color: var(--hover-color);
     }
 
     .header-buttons {
@@ -173,7 +212,7 @@ nav {
         font-weight: bold;
         font-size: 16px;
         white-space: nowrap;
-        border-style: groove;
+        border-style: solid;
         border-radius: 100px;
     }
 }
@@ -343,7 +382,7 @@ p.title {
     width: 40%;
     padding: 5px;
     height: 360px;
-    border-style: groove;
+    border-style: solid;
     border-color: var(--border-color);
     color: var(--foreground);
     align-items: center;
@@ -400,6 +439,8 @@ p.title {
 }
 
 .buttons .btn {
+    background-color: var(--background2);
+    color: var(--foreground3);
     margin: 0;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
 }
@@ -435,7 +476,7 @@ img#saved {
     padding: 10px;
     gap: 10px;
     max-height: 440px;
-    border-style: groove;
+    border-style: solid;
     border-color: var(--border-color);
     color: var(--foreground);
     flex-direction: row;
@@ -626,7 +667,7 @@ footer {
     margin-bottom: 30px;
     background-color: var(--background2);
     border-color: var(--border-color);
-    border-style: groove;
+    border-style: solid;
     border-radius: 10px;
     align-items: center;
     filter: drop-shadow(5px 10px 8px rgba(0, 0, 0, 0.5));
@@ -637,7 +678,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--foreground2);
+    color: var(--foreground3);
 }
 
 .information p {
@@ -670,7 +711,7 @@ time {
 }
 
 .social_btn:hover {
-    background-color: var(--background2);
+    background-color: var(--hover-color);
     transform: scale(1.05);
 }
 
@@ -709,6 +750,7 @@ time {
 
 .authDiv img {
     width: 30%;
+    background: var(--background3);
 }
 
 .paymentDiv img {
@@ -742,7 +784,7 @@ time {
     margin: 5px;
     width: 50%;
     padding: 10px;
-    border-style: groove;
+    border-style: solid;
     border-width: 5px;
     border-color: var(--border-color);
 }
@@ -750,6 +792,10 @@ time {
 .authForm input:focus-within,
 .paymentForm input:focus-within {
     border-color: #58df78;
+}
+
+input:user-invalid{
+    border-color: red;
 }
 
 .paymentDiv label {
@@ -793,8 +839,8 @@ time {
     height: auto;
     min-height: 150px;
     border-radius: 40px;
-    border-style: groove;
-    border-color: var(--border-color);
+    background: radial-gradient(circle, hsla(17, 83%, 54%, 1) 21%, hsla(16, 90%, 77%, 1) 100%);
+    border-style: solid;
     color: var(--foreground);
     justify-content: center;
     justify-items: center;
@@ -912,7 +958,7 @@ time {
     max-height: 40px;
     margin: 5px;
     padding: 10px;
-    border-style: groove;
+    border-style: solid;
     border-width: 5px;
     border-color: var(--border-color);
 }
