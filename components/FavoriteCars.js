@@ -4,14 +4,14 @@ import { useAuth } from '@/context/AuthContext';
 
 export default function FavoriteCars() {
     const router = useRouter();
-    const { user } = useAuth();  // Получаем информацию о пользователе
-    const [cars, setCars] = useState([]);  // Состояние для хранения автомобилей
+    const { user } = useAuth();  
+    const [cars, setCars] = useState([]);  
 
     const buyCar = async (carId, price) => {
-        const userId = user?.userId; // Или user?.userId в зависимости от структуры
+        const userId = user?.userId; 
         if (!userId || user.role == 'manager') {
             console.error("User ID is missing! or invalid role");
-            return; // Остановим выполнение, если userId нет
+            return; 
         }
         console.log('Navigating to payment...');
         await router.push({
@@ -20,7 +20,6 @@ export default function FavoriteCars() {
         });
     };
 
-    // Функция для получения автомобилей пользователя
     const getFavoriteCars = async (userId) => {
         try {
             const res = await fetch(`/api/cars/getFavoriteCars`, {
@@ -33,11 +32,11 @@ export default function FavoriteCars() {
             const data = await res.json();
             console.log('Favorite Cars:', data);
             if (data && Array.isArray(data.favoriteCars)) {
-                setCars(data.favoriteCars);  // Присваиваем массив автомобилей из объекта
+                setCars(data.favoriteCars); 
                 console.log('setCars', cars);
             } else {
                 console.error("Полученные данные не являются массивом:", data);
-                setCars([]); // Очищаем список автомобилей в случае ошибки
+                setCars([]);
             }
         } catch (error) {
             console.error('Error fetching user cars:', error);
@@ -63,7 +62,6 @@ export default function FavoriteCars() {
 
             const data = await res.json();
             if (res.ok) {
-                // Удаляем автомобиль из избранного
                 setCars((prev) => prev.filter(car => car._id !== carId));
             } else {
                 console.error(`Error removing car from favorites:`, data.error);
@@ -74,11 +72,10 @@ export default function FavoriteCars() {
     };
 
     useEffect(() => {
-        // Проверяем, существует ли пользователь и его userId
         if (user && user.userId) {
-            getFavoriteCars(user.userId);  // Запрашиваем машины пользователя
+            getFavoriteCars(user.userId);  
         }
-    }, [user]);  // Зависимость на user
+    }, [user]);  
 
     return (
         <div className='container'>

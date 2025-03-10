@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 
 export default function OtherInfo() {
-    const { user } = useAuth();  // Получаем информацию о пользователе
-    const [cars, setCars] = useState([]);  // Состояние для хранения автомобилей
-
-    // Функция для получения автомобилей пользователя
+    const { user } = useAuth();  
+    const [cars, setCars] = useState([]);  
     const getUserCars = async (userId) => {
         try {
             const res = await fetch(`/api/cars/getUserCars`, {
@@ -18,11 +16,11 @@ export default function OtherInfo() {
             const data = await res.json();
             console.log('User Cars:', data);
             if (data && Array.isArray(data.existingCars)) {
-                setCars(data.existingCars);  // Присваиваем массив автомобилей из объекта
+                setCars(data.existingCars);  
                 console.log('setCars', cars);
             } else {
                 console.error("Полученные данные не являются массивом:", data);
-                setCars([]); // Очищаем список автомобилей в случае ошибки
+                setCars([]); 
             }
         } catch (error) {
             console.error('Error fetching user cars:', error);
@@ -30,11 +28,10 @@ export default function OtherInfo() {
     };
 
     useEffect(() => {
-        // Проверяем, существует ли пользователь и его userId
         if (user && user.userId) {
-            getUserCars(user.userId);  // Запрашиваем машины пользователя
+            getUserCars(user.userId);
         }
-    }, [user]);  // Зависимость на user
+    }, [user]); 
 
     return (
         <div className='container'>

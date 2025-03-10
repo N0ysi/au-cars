@@ -11,9 +11,9 @@ export default function AddUser() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("Submitting registration with:", { username, email, password, role }); // Логирование данных перед отправкой
+        console.log("Submitting registration with:", { username, email, password, role }); 
 
-        const res = await fetch('/api/manager/addUser', {
+        const res = await fetch('/api/users/addUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,9 +33,9 @@ export default function AddUser() {
             }, 2000);
         } else {
             if (typeof data.message === 'object') {
-                setError(JSON.stringify(data.message)); // Преобразуем объект в строку
+                setError(JSON.stringify(data.message)); 
             } else {
-                setError(data.message); // Если строка — просто выводим
+                setError(data.message); 
             }
         }
     };

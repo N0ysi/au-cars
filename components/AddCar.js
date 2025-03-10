@@ -38,9 +38,9 @@ export default function AddCar() {
             }, 2000);
         } else {
             if (typeof data.message === 'object') {
-                setError(JSON.stringify(data.message)); // Преобразуем объект в строку
+                setError(JSON.stringify(data.message));
             } else {
-                setError(data.message); // Если строка — просто выводим
+                setError(data.message);
             }
         }
     };

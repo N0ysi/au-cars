@@ -17,11 +17,11 @@ export default function ManageUsers() {
     const openUser = (userId) => {
         console.log('openUser id', userId);
         if (openedUserId === userId) {
-            setOpenedUserId(null); // Закрываем машину
-            setUserHeight(300); // Уменьшаем ширину
+            setOpenedUserId(null); 
+            setUserHeight(300); 
         } else {
-            setOpenedUserId(userId); // Открываем машину
-            setUserHeight(650); // Увеличиваем ширину
+            setOpenedUserId(userId);
+            setUserHeight(650); 
         }
     };
 
@@ -38,7 +38,7 @@ export default function ManageUsers() {
         const token = Cookies.get('token');
         if (token) {
             try {
-                const res = await fetch('/api/manager/updateUser', {
+                const res = await fetch('/api/users/updateUser', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -56,7 +56,6 @@ export default function ManageUsers() {
                 console.log('saveChanges', data);
                 if (res.ok) {
                     console.log('User updated successfully');
-                    // Добавляем пользователя в массив savedUsers для изменения цвета кнопки
                     setSavedUsers((prevSavedUsers) => [...prevSavedUsers, user._id]);
                     setTimeout(() => {
                         setSavedUsers((prevSavedUsers) =>
@@ -76,7 +75,7 @@ export default function ManageUsers() {
         const token = Cookies.get('token');
         if (token) {
             try {
-                const res = await fetch('/api/manager/deleteUser', {
+                const res = await fetch('/api/users/deleteUser', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -90,7 +89,6 @@ export default function ManageUsers() {
                 console.log('deleteUser', data);
                 if (res.ok) {
                     console.log('User has been deleted successfully');
-                    // Добавляем пользователя в массив savedUsers для изменения цвета кнопки
                     setDeletedUser((prevSavedUser) => [...prevSavedUser, user._id]);
                     setTimeout(() => {
                         setDeletedUser((prevSavedUser) =>
@@ -117,11 +115,11 @@ export default function ManageUsers() {
             const data = await res.json();
             if (res.ok) {
                 if (data && Array.isArray(data.users)) {
-                    setUsers(data.users);  // Присваиваем массив автомобилей из объекта
+                    setUsers(data.users); 
                     console.log('setUsers', users);
                 } else {
                     console.error("not array:", users);
-                    setUsers([]); // Очищаем список автомобилей в случае ошибки
+                    setUsers([]);
                 }
             } else {
                 console.error("Error getting users:", data.error);
@@ -146,10 +144,9 @@ export default function ManageUsers() {
                     <ul className='manageUl'>
                         {users.map((mappingUser) => (
                             <li key={mappingUser._id} className='manageLi'>
-                                {/* Кнопка для открытия формы */}
                                 <div
                                     id={mappingUser._id}
-                                    className="listDiv"  // Устанавливаем класс userBtn
+                                    className="listDiv"
                                     onClick={() => { openUser(mappingUser._id); }}
                                 >
                                     {mappingUser.username}

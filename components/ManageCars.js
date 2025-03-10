@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 export default function ManageCars() {
     const [cars, setCars] = useState([]);
-    const [openedCarId, setOpenedCarId] = useState(null); // Для отслеживания открытого пользователя
+    const [openedCarId, setOpenedCarId] = useState(null); 
     const [savedCars, setSavedCars] = useState([]);
     const [deletedCars, setDeletedCars] = useState([]);
     const [carHeight, setCarHeight] = useState(300);
@@ -16,13 +16,12 @@ export default function ManageCars() {
 
     const openCar = (carId) => {
         console.log('openCar id', carId);
-        // Открываем или закрываем автомобиль
         if (openedCarId === carId) {
-            setOpenedCarId(null); // Закрываем машину
-            setCarHeight(300); // Уменьшаем ширину
+            setOpenedCarId(null); 
+            setCarHeight(300); 
         } else {
-            setOpenedCarId(carId); // Открываем машину
-            setCarHeight(650); // Увеличиваем ширину
+            setOpenedCarId(carId); 
+            setCarHeight(650); 
         }
     };
 
@@ -62,7 +61,6 @@ export default function ManageCars() {
                 console.log('saveChanges', data);
                 if (res.ok) {
                     console.log('Car updated successfully');
-                    // Добавляем пользователя в массив savedUsers для изменения цвета кнопки
                     setSavedCars((prevSavedCars) => [...prevSavedCars, car._id]);
                     setTimeout(() => {
                         setSavedCars((prevSavedCars) =>
@@ -96,7 +94,6 @@ export default function ManageCars() {
                 console.log('deleteCar', data);
                 if (res.ok) {
                     console.log('Car has been deleted successfully');
-                    // Добавляем пользователя в массив savedUsers для изменения цвета кнопки
                     setDeletedCars((prevSavedCars) => [...prevSavedCars, car._id]);
                     setTimeout(() => {
                         setDeletedCars((prevSavedCars) =>
@@ -125,11 +122,11 @@ export default function ManageCars() {
             console.log(data);
             if (res.ok) {
                 if (data && Array.isArray(data.cars)) {
-                    setCars(data.cars);  // Присваиваем массив автомобилей из объекта
+                    setCars(data.cars);  
                     console.log('setCars', cars);
                 } else {
                     console.error("not array:", cars);
-                    setCars([]); // Очищаем список автомобилей в случае ошибки
+                    setCars([]); 
                 }
             } else {
                 console.error("Error getting cars:", data.error);
@@ -148,17 +145,16 @@ export default function ManageCars() {
             <div
                 id='manageCarsDiv'
                 className="manage"
-                style={{ maxHeight: `${carHeight}px` }} // Устанавливаем ширину
+                style={{ maxHeight: `${carHeight}px` }} 
             >
                 {cars && cars.length > 0 ? (
                     <ul className='manageUl'>
 
                         {cars.map((mappingCar) => (
                             <li key={mappingCar._id} className='manageLi'>
-                                {/* Кнопка для открытия формы */}
                                 <div
                                     id={mappingCar._id}
-                                    className="listDiv"  // Устанавливаем класс userBtn
+                                    className="listDiv"  
                                     onClick={() => openCar(mappingCar._id)}
                                 >
                                     {mappingCar.userId !== '' ?
