@@ -17,13 +17,10 @@ export default function OtherInfo() {
             console.log('User Cars:', data);
             if (data && Array.isArray(data.existingCars)) {
                 setCars(data.existingCars);  
-                console.log('setCars', cars);
             } else {
-                console.error("Полученные данные не являются массивом:", data);
                 setCars([]); 
             }
         } catch (error) {
-            console.error('Error fetching user cars:', error);
         }
     };
 

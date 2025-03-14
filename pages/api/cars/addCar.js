@@ -6,12 +6,10 @@ const handler = async (req, res) => {
 
     if (req.method === 'POST') {
         let { name, power, torque, transmission, carType, price, url, imgUrl, amount } = req.body;
-        console.log("Received request to register:", { name, power, torque, transmission, carType, price, url, imgUrl, amount });
         try {
             await dbConnect();
 
             const existingCar = await Car.findOne({ name });
-            console.log("existing car", existingCar);
             if (existingCar) {
                 existingCar.amount = parseInt(amount) + parseInt(existingCar.amount);
                 await existingCar.save();
@@ -45,8 +43,6 @@ const handler = async (req, res) => {
             }
 
         } catch (error) {
-            console.error("Error during adding:", error);
-
             res.status(500).json({ message: error });
         }
     } else {

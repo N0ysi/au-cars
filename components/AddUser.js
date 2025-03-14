@@ -11,8 +11,6 @@ export default function AddUser() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("Submitting registration with:", { username, email, password, role }); 
-
         const res = await fetch('/api/users/addUser', {
             method: 'POST',
             headers: {
@@ -24,7 +22,6 @@ export default function AddUser() {
         const data = await res.json();
         console.log(data);
         if (res.ok) {
-            console.log('success');
             setSavedUser((prevSavedUser) => [...prevSavedUser, email]);
             setTimeout(() => {
                 setSavedUser((prevSavedUser) =>

@@ -13,8 +13,6 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("Submitting registration with:", { username, email, password }); // Логирование данных перед отправкой
-
         const res = await fetch('/api/auth/register', {
             method: 'POST',
             headers: {
@@ -25,12 +23,12 @@ const Register = () => {
 
         const data = await res.json();
         if (res.ok) {
-            router.push('/login'); // Перенаправление на страницу входа
+            router.push('/login');
         } else {
             if (typeof data.message === 'object') {
-                setError(JSON.stringify(data.message)); // Преобразуем объект в строку
+                setError(JSON.stringify(data.message)); 
             } else {
-                setError(data.message); // Если строка — просто выводим
+                setError(data.message);
             }
         }
     };

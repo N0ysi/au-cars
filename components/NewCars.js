@@ -9,40 +9,32 @@ export default function NewCars() {
   const [favoriteCars, setFavoriteCars] = useState([]);
 
   const buyCar = async (carId, price) => {
-    const userId = user?.userId; // Или user?.userId в зависимости от структуры
+    const userId = user?.userId; 
     if (!userId || user.role == 'manager') {
-      console.error("User ID is missing! or invalid role");
-      return; // Остановим выполнение, если userId нет
+      return; 
     }
-    console.log('Navigating to payment...');
     await router.push({
       pathname: '/payment',
       query: { carId, price, userId }
     });
-    console.log('Navigation completed');
   };
 
 
   const getOurCars = async () => {
     try {
       const res = await fetch('/api/cars/getOurCars', {
-        method: 'GET', // Используем метод GET
+        method: 'GET',
         cache: 'no-store'
       });
       const data = await res.json();
       if (res.ok) {
         if (data && Array.isArray(data.cars)) {
-          setCars(data.cars);  // Присваиваем массив автомобилей из объекта
-          console.log('setCars', cars);
+          setCars(data.cars);  
         } else {
-          console.error("Полученные данные не являются массивом:", data);
-          setCars([]); // Очищаем список автомобилей в случае ошибки
+          setCars([]); 
         }
-      } else {
-        console.error("Ошибка при получении автомобилей:", data.error);
       }
     } catch (error) {
-      console.error('Ошибка при запросе автомобилей:', error);
     }
   };
 
@@ -60,13 +52,11 @@ export default function NewCars() {
       });
       const data = await res.json();
       if (res.ok && data && Array.isArray(data.favoriteCars)) {
-        setFavoriteCars(data.favoriteCars.map(car => car._id)); // Сохраняем только ID автомобилей
+        setFavoriteCars(data.favoriteCars.map(car => car._id)); 
       } else {
-        console.error("Полученные данные не являются массивом:", data);
         setFavoriteCars([]);
       }
     } catch (error) {
-      console.error('Error fetching user cars:', error);
     }
   };
 
@@ -74,7 +64,6 @@ export default function NewCars() {
   const toggleFavorite = async (carId) => {
     const userId = user?.userId;
     if (!userId) {
-      console.error("User ID is missing!");
       return;
     }
 
@@ -91,17 +80,12 @@ export default function NewCars() {
       const data = await res.json();
       if (res.ok) {
         if (isFavorite) {
-          // Удаляем автомобиль из избранного
           setFavoriteCars((prev) => prev.filter(id => id !== carId));
         } else {
-          // Добавляем автомобиль в избранное
           setFavoriteCars((prev) => [...prev, carId]);
         }
-      } else {
-        console.error(`Error ${isFavorite ? 'removing' : 'adding'} car to favorites:`, data.error);
       }
     } catch (error) {
-      console.error(`Error ${isFavorite ? 'removing' : 'adding'} car to favorites:`, error);
     }
   };
 

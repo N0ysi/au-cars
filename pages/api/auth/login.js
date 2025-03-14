@@ -12,13 +12,11 @@ export default async function handler(req, res) {
 
       const user = await User.findOne({ email });
       if (!user) {
-        console.log("User not found");
         return res.status(401).json({ message: "wrong email or password" });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        console.log("Password mismatch");
         return res.status(401).json({ message: "wrong email or password" });
       }
 
@@ -44,7 +42,6 @@ export default async function handler(req, res) {
       });
 
     } catch (error) {
-      console.error("Login error:", error);
       return res.status(500).json({ message: "Server error", error });
     }
   } else {

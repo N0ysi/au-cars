@@ -7,7 +7,6 @@ const handler = async (req, res) => {
 
     if (req.method === 'POST') {
         let { username, email, password, role } = req.body;
-        console.log("Received request to register:", { username, email, password, role });
         try {
             await dbConnect();
 
@@ -17,7 +16,6 @@ const handler = async (req, res) => {
             }
 
             const existingUser = await User.findOne({ email });
-            console.log("existing car", existingUser);
             if (existingUser) {
                 res.status(401).json({
                     success: false,
@@ -47,8 +45,6 @@ const handler = async (req, res) => {
             }
 
         } catch (error) {
-            console.error("Error during adding:", error);
-
             res.status(500).json({ message: error });
         }
     } else {

@@ -9,13 +9,8 @@ const handler = async (req, res) => {
     if (req.method === 'POST') {
         const { carId, name, power, torque, transmission, carType,
             price, url, imgUrl, amount, userId } = req.body;
-        console.log('update', {
-            carId, name, power, torque, transmission, carType,
-            price, url, imgUrl, amount, userId
-        });
 
         if (userId != null) {
-            // Проверяем наличие всех необходимых данных
             if (!userId) {
                 res.status(400).json({ message: 'Please provide actual userId' });
             }
@@ -26,8 +21,6 @@ const handler = async (req, res) => {
             if (!car) {
                 res.status(404).json({ message: 'Car not found' });
             }
-
-            console.log('car', car);
 
             car.name = name;
             car.power = power;
@@ -51,5 +44,4 @@ const handler = async (req, res) => {
     }
 };
 
-// Используем middleware для проверки роли администратора
 export default withRole(handler, ['manager']);

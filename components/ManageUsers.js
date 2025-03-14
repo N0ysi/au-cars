@@ -15,7 +15,6 @@ export default function ManageUsers() {
     };
 
     const openUser = (userId) => {
-        console.log('openUser id', userId);
         if (openedUserId === userId) {
             setOpenedUserId(null); 
             setUserHeight(300); 
@@ -53,20 +52,15 @@ export default function ManageUsers() {
                     }),
                 });
                 const data = await res.json();
-                console.log('saveChanges', data);
                 if (res.ok) {
-                    console.log('User updated successfully');
                     setSavedUsers((prevSavedUsers) => [...prevSavedUsers, user._id]);
                     setTimeout(() => {
                         setSavedUsers((prevSavedUsers) =>
                             prevSavedUsers.filter((id) => id !== user._id)
                         );
                     }, 2000);
-                } else {
-                    console.error(data.message);
                 }
             } catch (error) {
-                console.error('Error updating user:', error);
             }
         }
     }
@@ -86,7 +80,6 @@ export default function ManageUsers() {
                     }),
                 });
                 const data = await res.json();
-                console.log('deleteUser', data);
                 if (res.ok) {
                     console.log('User has been deleted successfully');
                     setDeletedUser((prevSavedUser) => [...prevSavedUser, user._id]);
@@ -96,11 +89,8 @@ export default function ManageUsers() {
                         );
                     }, 2000);
                     manageUsers();
-                } else {
-                    console.error(data.message);
-                }
+                } 
             } catch (error) {
-                console.error('Error deleting user:', error);
             }
         }
     }
@@ -116,16 +106,11 @@ export default function ManageUsers() {
             if (res.ok) {
                 if (data && Array.isArray(data.users)) {
                     setUsers(data.users); 
-                    console.log('setUsers', users);
                 } else {
-                    console.error("not array:", users);
                     setUsers([]);
                 }
-            } else {
-                console.error("Error getting users:", data.error);
             }
         } catch (error) {
-            console.error('Error getting users:', error);
         }
     }
 

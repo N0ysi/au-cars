@@ -5,12 +5,10 @@ export default async function handler(req, res) {
 
     if (req.method === 'POST') {
         let { userId } = req.body;
-        console.log("Received request:", { userId });
         try {
             await dbConnect();
 
             const existingCars = await Car.find({ userId });
-            console.log("existing car (getUserCars)", existingCars);
             if (existingCars) {
                 res.status(201).json({ existingCars })
             } else {

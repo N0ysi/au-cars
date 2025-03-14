@@ -44,5 +44,4 @@ const Car = new mongoose.Schema({
   }
 });
 
-// Exporting the Car model
 export default mongoose.models.Car || mongoose.model('Car', Car);

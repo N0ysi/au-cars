@@ -9,8 +9,6 @@ const handler = async (req, res) => {
 
     if (req.method === 'POST') {
         const { userId, username, email, password, role } = req.body;
-        console.log('update', { userId, username, email, password, role });
-        // Проверяем наличие всех необходимых данных
         if (!userId) {
             res.status(400).json({ message: 'Please provide userId' });
         }
@@ -22,7 +20,6 @@ const handler = async (req, res) => {
 
         try {
             const user = await User.findById(userId);
-            console.log(user);
             if (!user) {
                 res.status(404).json({ message: 'User not found' });
             }
@@ -52,5 +49,4 @@ const handler = async (req, res) => {
     }
 };
 
-// Используем middleware для проверки роли администратора
 export default withRole(handler, ['manager']);

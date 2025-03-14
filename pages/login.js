@@ -25,7 +25,7 @@ const Login = () => {
         const data = await res.json();
         if (res.ok) {
             login(email, password);
-            router.push('/'); // Přesměrování na hlavní stranku
+            router.push('/');
         } else {
             setError(data.message);
         }

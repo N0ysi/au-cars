@@ -58,20 +58,15 @@ export default function ManageCars() {
                     }),
                 });
                 const data = await res.json();
-                console.log('saveChanges', data);
                 if (res.ok) {
-                    console.log('Car updated successfully');
                     setSavedCars((prevSavedCars) => [...prevSavedCars, car._id]);
                     setTimeout(() => {
                         setSavedCars((prevSavedCars) =>
                             prevSavedCars.filter((id) => id !== car._id)
                         );
                     }, 2000);
-                } else {
-                    console.error(data.message);
                 }
             } catch (error) {
-                console.error('Error updating car:', error);
             }
         }
     }
@@ -93,7 +88,6 @@ export default function ManageCars() {
                 const data = await res.json();
                 console.log('deleteCar', data);
                 if (res.ok) {
-                    console.log('Car has been deleted successfully');
                     setDeletedCars((prevSavedCars) => [...prevSavedCars, car._id]);
                     setTimeout(() => {
                         setDeletedCars((prevSavedCars) =>
@@ -101,11 +95,8 @@ export default function ManageCars() {
                         );
                     }, 2000);
                     manageCars();
-                } else {
-                    console.error(data.message);
-                }
+                } 
             } catch (error) {
-                console.error('Error deleting car:', error);
             }
         }
     }
@@ -119,7 +110,6 @@ export default function ManageCars() {
 
             const data = await res.json();
 
-            console.log(data);
             if (res.ok) {
                 if (data && Array.isArray(data.cars)) {
                     setCars(data.cars);  
@@ -128,11 +118,8 @@ export default function ManageCars() {
                     console.error("not array:", cars);
                     setCars([]); 
                 }
-            } else {
-                console.error("Error getting cars:", data.error);
             }
         } catch (error) {
-            console.error('Error getting cars:', error);
         }
     }
 
@@ -161,7 +148,6 @@ export default function ManageCars() {
                                         (
                                             mappingCar.name + ' (sold)'
                                         ) : (
-
                                             mappingCar.name
                                         )}
                                 </div>

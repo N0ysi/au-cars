@@ -11,10 +11,6 @@ export default function NewCars() {
     const [CVV, setCVV] = useState('');
     const [error, setError] = useState('');
 
-
-    console.log(`Buying car with ID: carId: ${carId} | userId: ${userId} | price: ${price}`);
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -22,7 +18,6 @@ export default function NewCars() {
         actualDate = actualDate.split('.')[1] + '/' + actualDate.split('.')[2].slice(3);
         if (cardDate < Date.parse(actualDate)) {
             setError("Wrong Card Date");
-            console.error("Wrong Card Date");
             return;
         }
 
@@ -48,7 +43,6 @@ export default function NewCars() {
                         body: JSON.stringify({ carId, userId }),
                     });
                 } catch (error) {
-                    console.error('Error removing car from favorites:', error);
                 };
                 if (res.ok) {
                     var button = document.getElementById('payBtn');
@@ -59,11 +53,9 @@ export default function NewCars() {
                 }
             } else {
                 setError(`Error:  ${data.message}`);
-                console.error("Error purchasing car:", data.message);
             }
         } catch (error) {
             setError(`Error:  ${error}`);
-            console.error('Error purchasing car:', error);
         }
     }
 

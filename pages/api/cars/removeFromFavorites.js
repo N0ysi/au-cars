@@ -5,18 +5,13 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const { carId, userId } = req.body;
 
-        console.log('removeFromFavorites');
-
-        // Validate input
         if (!carId || !userId) {
             return res.status(400).json({ message: 'carId and userId are required' });
         }
 
         try {
-            // Connect to the database
             await dbConnect();
 
-            // Find the user by ID
             const existingUser = await User.findById(userId);
 
             if (!existingUser) {
@@ -24,7 +19,6 @@ export default async function handler(req, res) {
             }
 
 
-            // Check if the car is in the user's favorites
             if (!existingUser.favoriteCars.includes(carId)) {
                 return res.status(200).json({
                     success: true,
@@ -32,13 +26,10 @@ export default async function handler(req, res) {
                 });
             }
             
-            // Remove the car from the favorites
             existingUser.favoriteCars = existingUser.favoriteCars.filter(id => id !== carId);
 
-            // Save changes
             await existingUser.save();
 
-            // Send success response
             return res.status(200).json({
                 success: true,
                 data: existingUser,
@@ -46,7 +37,6 @@ export default async function handler(req, res) {
             });
 
         } catch (error) {
-            console.error("Error during removeFromFavorites:", error);
             res.status(500).json({
                 message: 'Internal Server Error',
                 error: error.message
@@ -54,7 +44,6 @@ export default async function handler(req, res) {
         }
 
     } else {
-        // Method not allowed
         res.status(405).json({ message: 'Method not allowed' });
     }
 }

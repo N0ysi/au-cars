@@ -6,17 +6,14 @@ if (!MONGODB_URI) {
     throw new Error('MONGODB_URI is undefined');
 }
 
-let isConnected; // Je připojení navázáno?
+let isConnected;
 
 export default async function dbConnect() {
     if (isConnected) {
-        // Pokud je připojení již navázáno, nic neděláme
         return;
     }
 
-    // Устанавливаем новое соединение
     const db = await mongoose.connect(MONGODB_URI);
 
-    isConnected = db.connections[0].readyState; //  Nastavení stavu připojení
-    console.log('DB connected');
+    isConnected = db.connections[0].readyState; 
 }

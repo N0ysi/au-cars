@@ -6,7 +6,6 @@ const handler = async (req, res) => {
     await dbConnect();
     if (req.method === 'POST') {
         const { userId: userId } = req.body;
-        console.log('delete', { userId: userId });
         if (!userId) {
             res.status(400).json({ message: 'Please provide userId' });
         }
@@ -18,7 +17,6 @@ const handler = async (req, res) => {
                 res.status(200).json({ message: 'User has been deleted successfully', userId });
             }
         } catch (error) {
-            console.log(error.message);
             res.status(500).json({ message: 'Error deleting user', error });
         }
     } else {
@@ -26,5 +24,4 @@ const handler = async (req, res) => {
     }
 };
 
-// Используем middleware для проверки роли администратора
 export default withRole(handler, ['manager']);

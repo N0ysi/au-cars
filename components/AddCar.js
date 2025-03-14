@@ -16,8 +16,6 @@ export default function AddCar() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("Submitting registration with:", { name, power, torque, transmission, carType, price, url, imgUrl, amount }); // Логирование данных перед отправкой
-
         const res = await fetch('/api/cars/addCar', {
             method: 'POST',
             headers: {

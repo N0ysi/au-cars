@@ -10,10 +10,8 @@ export default function FavoriteCars() {
     const buyCar = async (carId, price) => {
         const userId = user?.userId; 
         if (!userId || user.role == 'manager') {
-            console.error("User ID is missing! or invalid role");
             return; 
         }
-        console.log('Navigating to payment...');
         await router.push({
             pathname: '/payment',
             query: { carId, price, userId }
@@ -30,23 +28,18 @@ export default function FavoriteCars() {
                 body: JSON.stringify({ userId })
             });
             const data = await res.json();
-            console.log('Favorite Cars:', data);
             if (data && Array.isArray(data.favoriteCars)) {
                 setCars(data.favoriteCars); 
-                console.log('setCars', cars);
             } else {
-                console.error("Полученные данные не являются массивом:", data);
                 setCars([]);
             }
         } catch (error) {
-            console.error('Error fetching user cars:', error);
         }
     };
 
     const removeFromFavorites = async (carId) => {
         const userId = user?.userId;
         if (!userId) {
-            console.error("User ID is missing!");
             return;
         }
 
@@ -63,11 +56,8 @@ export default function FavoriteCars() {
             const data = await res.json();
             if (res.ok) {
                 setCars((prev) => prev.filter(car => car._id !== carId));
-            } else {
-                console.error(`Error removing car from favorites:`, data.error);
             }
         } catch (error) {
-            console.error(`Error removing car from favorites:`, error);
         }
     };
 
